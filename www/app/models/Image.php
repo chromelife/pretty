@@ -1,5 +1,16 @@
 <?php
 
 class Image extends \Eloquent {
-	protected $fillable = [];
+	protected $fillable = array(
+		'visible',
+		'title',
+		'image_url',
+		'uploaded_on'
+		);
+	public static $rules = array(
+		// 'date' => 'required',
+		// 'title' => 'required',
+		'visible' => 'required',
+		'image' => 'image'
+	);
 }
