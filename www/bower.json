@@ -1,0 +1,30 @@
+{
+  "name": "basebox",
+  "version": "0.0.1",
+  "description": "Rapid Application/Web development Basebox",
+  "main": "/dev/sass/",
+  "moduleType": [
+    "node"
+  ],
+  "authors": [
+    "Mathew Jensterle"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.0",
+    "bootstrap-sass-official": "master",
+    "gridle": "~1.3.0"
+
+  },
+  "devDependencies": {
+    "faker": "~0.0.2"
+  }
+}
