@@ -61,7 +61,6 @@ class ImagesController extends BaseController {
 			
 			//write form input to db
 			Image::create 	([	'image_url' => '/Photos/'.$filename,
-								'uploaded_on' => Input::get('uploaded_on'),
 								'title' => Input::get('title'),
 								'visible' => Input::get('visible')
 							]);

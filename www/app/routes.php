@@ -11,9 +11,15 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+// Route::get( '/', function()
+// {
+// 	return View::make( 'hello' );
+// });
 
-Route::resource('images', 'ImagesController');
+Route::resource( 'images',	'ImagesController' );
+
+Route::resource( 'posts',	'PostsController' );
+
+Route::resource( 'pages',	'PagesController' );
+
+Route::get( '/', 'pageViewController@constructPageView');

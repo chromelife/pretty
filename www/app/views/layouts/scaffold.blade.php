@@ -7,7 +7,7 @@
 		<title>Draggable Dual-View Slideshow</title>
 		<meta name="description" content="Draggable Dual-View Slideshow: A Slideshow with two views and content area" />
 		<meta name="keywords" content="draggable, slideshow, fullscreen, carousel, views, zoomed, 3d transform, perspective, dragdealer" />
-		<meta name="author" content="Codrops" />
+		<meta name="author" content="Mat (based off a CoDrops demo)" />
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link href='http://fonts.googleapis.com/css?family=Playfair+Display:900,400|Lato:300,400,700' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
@@ -35,28 +35,7 @@
 					<button>Got it!</button>	
 				</div>
 			</div>
-			<div id="slideshow" class="dragslider">
-				<section class="img-dragger img-dragger-large dragdealer">
-					<div class="handle">
-						<div class="slide" data-content="">
-							<div class="img-wrap"><img src="" alt=""/></div>
-							<h2><span></span></h2>
-							<button class="content-switch">Read more</button>
-						</div>
-						
-					</div>
-				</section><!-- /img-dragger-->
-				<!-- Content section -->
-				<section class="pages">
-					<div class="content" data-content="content-1">
-						<h2><span></span></h2>
-						<p class="related">
-						
-						</p>
-					</div>
-					
-				</section>
-			</div>
+				@yield ('main')
 		</div><!-- /container --> 
 		<script src="js/dragdealer.js"></script>
 		<script src="js/classie.js"></script>

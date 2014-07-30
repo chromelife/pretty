@@ -1,0 +1,1 @@
+/var/www/app/views/posts/create.blade.php
