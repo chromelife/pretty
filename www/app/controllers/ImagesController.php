@@ -1,18 +1,19 @@
 <?php
 
+use Pretty\Commanding\CommandBus;
+use Pretty\Images\UploadImagetoStorageCommand;
+
 class ImagesController extends BaseController {
 
-	/**
-	 * Image Repository
-	 *
-	 * @var Image
-	 */
+	protected $commandBus;
 	protected $image;
 
-	public function __construct(Image $image)
+	function __construct(CommandBus $commandBus, Image $image)
 	{
+		$this->commandBus = $commandBus;
 		$this->image = $image;
 	}
+
 
 	/**
 	 * Display a listing of the images.
@@ -28,7 +29,7 @@ class ImagesController extends BaseController {
 	/**
 	 * Show the form for uploading a new image
 	 *
-	 * @return Response
+	 * @return View
 	 */
 	public function create()
 	{
@@ -58,12 +59,14 @@ class ImagesController extends BaseController {
 			$filename = $file->getClientOriginalName();
 			//write image to filesystem 
 			$file->move($destinationPath, $filename); 
-			
+			$image_url = '/photos' . $filename;
 			//write form input to db
-			Image::create 	([	'image_url' => '/Photos/'.$filename,
-								'title' => Input::get('title'),
-								'visible' => Input::get('visible')
-							]);
+			// Image::create 	([	'image_url' => '/Photos/'.$filename,
+			// 					'title' => Input::get('title'),
+			// 					'visible' => Input::get('visible')
+			// 				]);
+			$command = new UploadImagetoStorageCommand ($input['title'], $input['visible'], $image_url);
+			$this->commandBus->execute($command);
 		
 
 			return Redirect::route('images.index');

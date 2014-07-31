@@ -4,7 +4,7 @@
 	"keywords": ["framework", "laravel"],
 	"license": "MIT",
 	"require": {
-		"laravel/framework": "4.1.*",
+		"laravel/framework": "4.2.*",
 		"way/generators":"dev-master",
 		"laravelbook/ardent":"dev-master",
 		"fzaninotto/faker": "1.2.*@dev"
@@ -17,7 +17,11 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+		"psr-4" : {
+			"Pretty\\": "App/Pretty"
+		}
+		
 	},
 	"scripts": {
 		"post-install-cmd": [
