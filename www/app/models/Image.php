@@ -2,22 +2,17 @@
 
 class Image extends \Eloquent {
 	protected $fillable = array(
-		'visible',
-		'title',
 		'image_url',
-		'uploaded_on'
-		);
+		'title',
+		'visible'		
+	);
 	
 	public static $rules = array(
-		// 'date' => 'required',
-		// 'title' => 'required',
-		'visible' => 'required',
-		'image' => 'image'
+		'image' => 'image',
+		'title' => 'required'
+		// 'visible' => 'required'
+		
 	);
 
-	// public function Page () {
-
-	// 	return $this->belongsTo('Page');
-	// };
 
 }

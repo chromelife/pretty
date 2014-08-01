@@ -1,6 +1,6 @@
-<?php namespace Pretty\Commanding;
+<?php namespace Pretty\commanding;
 
-use Exception;
+use Exception; 
 
 class CommandTranslator {
 

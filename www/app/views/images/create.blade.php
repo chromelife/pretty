@@ -12,18 +12,12 @@
         </li>
 
         <li>
-            {{ Form::label('uploaded_on', 'uploaded_on:') }}
-            {{ Form::text('uploaded_on') }}
-        </li>
-
-        <li>
             {{ Form::label('title', 'Title:') }}
             {{ Form::text('title') }}
         </li>
 
-
         <li>
-            {{ Form::label('visible', 'Visible?') }}
+            {{ Form::label('visible', 'Visible:') }}
             {{ Form::text('visible') }}
         </li>
 

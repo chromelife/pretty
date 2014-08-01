@@ -1,4 +1,4 @@
-<?php namespace Pretty\Commanding;
+<?php namespace Pretty\commanding;
 
 interface CommandHandler {
 	

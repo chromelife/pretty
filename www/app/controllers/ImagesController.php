@@ -1,7 +1,7 @@
 <?php
 
-use Pretty\Commanding\CommandBus;
-use Pretty\Images\UploadImagetoStorageCommand;
+use Pretty\commanding\CommandBus;
+use Pretty\images\ImagetoStorageCommand;
 
 class ImagesController extends BaseController {
 
@@ -58,19 +58,20 @@ class ImagesController extends BaseController {
 			// ensure image has recognisable filename
 			$filename = $file->getClientOriginalName();
 			//write image to filesystem 
-			$file->move($destinationPath, $filename); 
-			$image_url = '/photos' . $filename;
-			//write form input to db
-			// Image::create 	([	'image_url' => '/Photos/'.$filename,
-			// 					'title' => Input::get('title'),
-			// 					'visible' => Input::get('visible')
-			// 				]);
-			$command = new UploadImagetoStorageCommand ($input['title'], $input['visible'], $image_url);
+			$file->move( $destinationPath, $filename ); 
+			$image_url = '/Photos/' . $filename;
+			$title = $input['title'];
+			$visible = $input['visible'];
+			
+			// Store image in DB 
+			$command = new ImageToStorageCommand ($title, $visible, $image_url);
 			$this->commandBus->execute($command);
-		
 
+			// return $command->visible;
+		
 			return Redirect::route('images.index');
 		}
+
 		// Show a message if upload does not validate against rules
 		return Redirect::route('images.create')
 			->withInput()

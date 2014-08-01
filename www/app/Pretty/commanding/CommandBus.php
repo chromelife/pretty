@@ -1,4 +1,4 @@
-<?php namespace Pretty\Commanding;
+<?php namespace Pretty\commanding;
 
 use Illuminate\Foundation\Application;
 
@@ -18,7 +18,7 @@ class CommandBus {
 	public function execute($command)
 	{
 		// translate object name to handler class
-		$handler = $this->commandTranslator->toCommandTranslator($command);
+		$handler = $this->commandTranslator->toCommandHandler($command);
 		// resolve out of IOC container and call handle method
 		return $this->app->make($handler)->handle($command);
 	}

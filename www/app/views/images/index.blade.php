@@ -21,7 +21,6 @@
 		<thead>
 			<tr>
 				<th>Image_url</th>
-				<th>Uploaded_on</th>
 				<th>Title</th>
 				<th>Visible?</th>
 				
@@ -32,7 +31,6 @@
 			@foreach ($images as $image)
 				<tr>
 					<td>{{{ $image->image_url }}}</td>
-					<td>{{{ $image->uploaded_on }}}</td>
 					<td>{{{ $image->title }}}</td>
 					<td>{{{ $image->visible }}}</td>
                     <td>{{ link_to_route('images.edit', 'Edit', array($image->id), array('class' => 'btn btn-info')) }}</td>
