@@ -17,7 +17,7 @@ class CreateImagesTable extends Migration {
 			$table->increments('id');
 			$table->string('image_url');
 			$table->string('title');
-			$table->boolean('visible');
+			$table->boolean('isVisible');
 			$table->timestamps();
 		});
 	}

@@ -4,13 +4,13 @@ class Image extends \Eloquent {
 	protected $fillable = array(
 		'image_url',
 		'title',
-		'visible'		
+		'isVisible'		
 	);
 	
 	public static $rules = array(
 		'image' => 'image',
 		'title' => 'required'
-		// 'visible' => 'required'
+		// 'isVisible' => 'required'
 		
 	);
 

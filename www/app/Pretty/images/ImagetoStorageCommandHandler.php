@@ -25,7 +25,7 @@ class ImagetoStorageCommandHandler implements CommandHandler {
 			$command->image_url
 		);
 
-		Log::info("Value of visible in ImagetoStorageCommandHandler [$command->visible]");
+		// Log::info("Value of visible in ImagetoStorageCommandHandler [$command->visible]");
 
 		// Dispatch events
 		$this->dispatcher->dispatch( $image->releaseEvents() );
