@@ -19,7 +19,7 @@ class PosttoStorageCommandHandler implements CommandHandler {
 
 	public function handle( $command )
 	{
-		$post = $this->post->storeImage(
+		$post = $this->post->storePost(
 			$command->title,
 			$command->visible,
 			$command->content
