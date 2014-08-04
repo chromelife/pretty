@@ -25,8 +25,6 @@ class PosttoStorageCommandHandler implements CommandHandler {
 			$command->content
 		);
 
-		// Log::info("Value of visible in ImagetoStorageCommandHandler [$command->visible]");
-
 		// Dispatch events
 		$this->dispatcher->dispatch( $post->releaseEvents() );
 		

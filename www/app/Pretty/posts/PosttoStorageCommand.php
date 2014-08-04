@@ -10,7 +10,6 @@ class PostToStorageCommand {
 	public $visible;
 	public $content;
 
-	
 
 	function __construct($title, $visible, $content)
 	{
