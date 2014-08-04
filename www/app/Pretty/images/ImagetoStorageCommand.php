@@ -17,6 +17,5 @@ class ImageToStorageCommand {
 		$this->title = $title;
 		$this->visible = $visible; 
 		$this->image_url = $image_url;
-		Log::info("Value of visible in ImagetoStorageCommand [$this->visible]");
 	}
 }

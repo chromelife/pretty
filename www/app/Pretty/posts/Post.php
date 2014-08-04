@@ -1,37 +1,37 @@
-<?php namespace Pretty\images;
-
+<?php namespace Pretty\posts
 use Pretty\eventing\EventGenerator;
 use Log;
 
-class Image extends \Eloquent {
+class Post extends \Eloquent {
 
 	use EventGenerator;
 
 	protected $fillable = array(
-		'image_url',
 		'title',
+		'content',
 		'visible'		
 	);
 	
 
-	public function storeImage($title, $visible, $image_url)
+	public function storePost($title, $visible, $content)
 	{
 		// store image details in DB through Eloquent model
-		// $image = Image::create(array('title' => $title, 'visible' => $visible, 'image_url' => $image_url));
+		// $post = Post::create(array('title' => $title, 'visible' => $visible, 'content' => $content));
 		
 		$this->title = $title;
 		$this->isVisible = $visible;
-		$this->image_url = $image_url;
+		$this->content = $content;
 
 		// Log::info(var_dump($this->all()));
+
+		
 
 		$this->save();
 
 		// Fire a ImageWasStored event
-		$this->raise(new ImageWasStored($this));
+		$this->raise(new PostWasStored($this));
 
 		return $this;
 	}
 
 }
-
