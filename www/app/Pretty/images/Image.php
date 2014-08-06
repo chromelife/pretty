@@ -9,11 +9,12 @@ class Image extends \Eloquent {
 
 	protected $fillable = [ 'image_url', 'title', 'isVisible' ];
 	
-	public function uploadImage( $file, $destinationPath, $filename )
+	public function uploadImage( $file, $destinationPath, $filename ) 
 	{
 		$this->file = $file;
 		$this->destinationPath = $destinationPath;
-		$this->filename = $filename;
+		// $this->filename = $filename;
+		$this->filename = $file->getClientOriginalName();
 		$file->move( $destinationPath, $filename );
 
 		// Fire a event

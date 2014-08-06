@@ -51,39 +51,26 @@ class ImagesController extends BaseController {
 		// Grab form inputs and validate
 		$input = Input::only( 'title', 'isVisible' );
 		$file = Input::file( 'image' );
-		// $validation = Validator::make($input, Image::$rules);
-		// $command =  new ImagetoStorageValidator ( $input );
-		// $this->commandBus->execute( $command );
-		$destinationPath = '';
+		$destinationPath = public_path().'/Photos/';
 		$filename = '';
+	
+		//grab filename
+		// $filename = $file->getClientOriginalName();
+		
+		//write image to filesystem 
+		$command = new ImageUploadCommand ( $file, $destinationPath, $filename );
+		$this->commandBus->execute( $command );
+		
+		// Get input/url to add to DB
+		$image_url = '/Photos/' . $filename;
+		$title = $input[ 'title' ];
+		$isVisible = $input[ 'isVisible' ];
+		
+		// Store image in DB 
+		$command = new ImageToStorageCommand ( $title, $isVisible, $image_url );
+		$this->commandBus->execute( $command );
 
-		// if ( $validation->passes() )
-		// {
-			// generate path/grab filename
-			$destinationPath = public_path().'/Photos/';
-			$filename = $file->getClientOriginalName();
-			
-			//write image to filesystem 
-			$command = new ImageUploadCommand ( $file, $destinationPath, $filename );
-			$this->commandBus->execute( $command );
-			
-			// Get input/url to add to DB
-			$image_url = '/Photos/' . $filename;
-			$title = $input[ 'title' ];
-			$isVisible = $input[ 'isVisible' ];
-			
-			// Store image in DB 
-			$command = new ImageToStorageCommand ( $title, $isVisible, $image_url );
-			$this->commandBus->execute( $command );
-
-			return Redirect::route( 'images.index' );
-		// }
-
-		// Show a message if upload does not validate against rules
-		// return Redirect::route( 'images.create' )
-		// 	->withInput()
-		// 	->withErrors($validation)
-		// 	->with( 'message', 'Check yourself before you wreck yourself.' );
+		return Redirect::route( 'images.index' );
 	}
 
 	/**
