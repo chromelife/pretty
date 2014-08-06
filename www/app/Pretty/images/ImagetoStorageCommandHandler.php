@@ -21,12 +21,11 @@ class ImagetoStorageCommandHandler implements CommandHandler {
 	{
 		$image = $this->image->storeImage(
 			$command->title,
-			$command->visible,
+			$command->isVisible,
 			$command->image_url
 		);
 
-		// Log::info("Value of visible in ImagetoStorageCommandHandler [$command->visible]");
-
+		
 		// Dispatch events
 		$this->dispatcher->dispatch( $image->releaseEvents() );
 		

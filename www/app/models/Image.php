@@ -9,8 +9,8 @@ class Image extends \Eloquent {
 	
 	public static $rules = array(
 		'image' => 'image',
-		'title' => 'required'
-		// 'isVisible' => 'required'
+		'title' => 'required',
+		'isVisible' => 'required'
 		
 	);
 

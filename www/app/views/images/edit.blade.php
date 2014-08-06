@@ -16,8 +16,8 @@
         </li>
 
         <li>
-            {{ Form::label('visible', 'Visible:') }}
-            {{ Form::input('string', 'visible') }}
+            {{ Form::label('isVisible', 'Is visible:') }}
+            {{ Form::input('string', 'isVisible') }}
         </li>
 
 		<li>

@@ -20,13 +20,7 @@ Route::resource( 'images',	'ImagesController' );
 
 Route::resource( 'posts',	'PostsController' );
 
-Route::resource( 'pages',	'PagesController' );
+// Route::resource( 'pages',	'PagesController' );
 
 Route::get( '/', 'pageViewController@constructPageView');
 
-
-// Route::get( 'collection', function () 
-// {
-// 	$collection = Image::all();
-// 	var_dump($collection->all());
-// });

@@ -3,18 +3,23 @@
 <head>
 
 	<meta charset="utf-8"/>
-	<title>Draggable Dual View</title>
+	<title>Crappy CMS</title>
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<link href="/fonts/standard/ss-standard.css" rel="stylesheet" type="text/css" media="all" />
-	<!-- <link href="/site.css" rel="stylesheet" type="text/css" media="all" /> -->
-	<link href="/bootstrap.css" rel="stylesheet" type="text/css" media="all" />	
+	<link href="/site.css" rel="stylesheet" type="text/css" media="all" />
+	<!-- <link href="/bootstrap.css" rel="stylesheet" type="text/css" media="all" />	 -->
 	
 
 </head>
 
-<body class="about">
-
+<body class="section">
+	
+ 		<tr>
+ 			<td><a href="../images">Images</a></td>
+			<td><a href="../posts">Posts</a></td>
+			<td><a href="../logout">Logout</a></td>
+		<tr>
 	<div id="canvas">
 		
 			@yield('main')

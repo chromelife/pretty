@@ -1,6 +1,16 @@
 <?php
 
+use Pretty\posts\PosttoStorageCommand;
+
 class PostsController extends \BaseController {
+
+	
+	protected $post;
+
+	function __construct( Post $post )
+	{
+		$this->post = $post;
+	}
 
 	/**
 	 * Display a listing of posts
@@ -31,15 +41,22 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
+		// Get input and validate
+		$input = Input::all();
 		$validator = Validator::make($data = Input::all(), Post::$rules);
 
 		if ($validator->fails())
 		{
 			return Redirect::back()->withErrors($validator)->withInput();
 		}
-
-		Post::create($data);
-
+		
+		// Take inputs and add new post to db
+		$title = $input['title'];
+		$content = $input['content'];
+		$isVisible = $input['isVisible'];
+		$command = new PosttoStorageCommand ($title, $isVisible, $content);
+		$this->commandBus->execute($command);
+		
 		return Redirect::route('posts.index');
 	}
 

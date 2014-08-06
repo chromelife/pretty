@@ -7,14 +7,14 @@ class PostToStorageCommand {
 	 
 
 	public $title;
-	public $visible;
+	public $isVisible;
 	public $content;
 
 
-	function __construct($title, $visible, $content)
+	function __construct($title, $isVisible, $content)
 	{
 		$this->title = $title;
-		$this->visible = $visible; 
+		$this->isVisible = $isVisible; 
 		$this->content = $content;
 	}
 }

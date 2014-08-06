@@ -11,7 +11,7 @@
 	</div>
 @endif 
 
-<a href="../logout">Logout</a>
+
 <h1>All Images</h1>
 
 <p>{{ link_to_route('images.create', 'Add new image') }}</p>
@@ -32,7 +32,7 @@
 				<tr>
 					<td>{{{ $image->image_url }}}</td>
 					<td>{{{ $image->title }}}</td>
-					<td>{{{ $image->visible }}}</td>
+					<td>{{{ $image->isVisible }}}</td>
                     <td>{{ link_to_route('images.edit', 'Edit', array($image->id), array('class' => 'btn btn-info')) }}</td>
                     <td>
                         {{ Form::open(array('method' => 'DELETE', 'route' => array('images.destroy', $image->id))) }}

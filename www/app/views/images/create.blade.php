@@ -17,8 +17,8 @@
         </li>
 
         <li>
-            {{ Form::label('visible', 'Visible:') }}
-            {{ Form::text('visible') }}
+            {{ Form::label('isVisible', 'Is visible:') }}
+            {{ Form::text('isVisible') }}
         </li>
 
 		<li>

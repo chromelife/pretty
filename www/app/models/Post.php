@@ -6,19 +6,14 @@ class Post extends \Eloquent {
 	public static $rules = array(
 		'title' 	=> 'required',
 		'content' 	=> 'required',
-		'visible' 	=> 'required'
+		'isVisible' => 'required'
 	);
 
 	// Don't forget to fill this array
 	protected $fillable = array(
 		'title',
 		'content',
-		'visible'
+		'isVisible'
 	);
-
-	// public function Page() {
-
-	// 	return $this->belongsTo('Page');
-	// }
 
 }

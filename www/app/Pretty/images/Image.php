@@ -1,34 +1,49 @@
 <?php namespace Pretty\images;
 
 use Pretty\eventing\EventGenerator;
-use Log;
+// use Log;
+use File;
 
 class Image extends \Eloquent {
 
 	use EventGenerator;
 
-	protected $fillable = array(
-		'image_url',
-		'title',
-		'visible'		
-	);
+	protected $fillable = ['image_url', 'title', 'isVisible'];
 	
+	public function uploadImage($file, $destinationPath, $filename)
+	{
+		$this->file = $file;
+		$this->destinationPath = $destinationPath;
+		$this->filename = $filename;
+		$file->move( $destinationPath, $filename );
 
-	public function storeImage($title, $visible, $image_url)
+		// Fire a event
+		$this->raise(new ImageWasUploaded( $this ));
+
+		return $this;
+	}
+
+
+	public static function storeImage($title, $isVisible, $image_url)
 	{
 		// store image details in DB through Eloquent model
-		// $image = Image::create(array('title' => $title, 'visible' => $visible, 'image_url' => $image_url));
-		
-		$this->title = $title;
-		$this->isVisible = $visible;
-		$this->image_url = $image_url;
+		$image = static::create( compact( 'title', 'image_url', 'isVisible' ));
+				
+		// Fire a event
+		$image->raise( new ImageWasStored( $image ));
 
-		// Log::info(var_dump($this->all()));
+		return $image;
+	}
 
-		$this->save();
+	public function deleteImage()
+	{
+		// $this->files->delete(public_path() . $image->image_url);
+		$file = public_path() . $this->image_url;
+		File::delete($file);
+		$this->delete();
 
-		// Fire a ImageWasStored event
-		$this->raise(new ImageWasStored($this));
+		//Fire a event
+		$this->raise ( new ImageWasDeleted($this) );
 
 		return $this;
 	}

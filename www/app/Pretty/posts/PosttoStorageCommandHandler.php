@@ -21,7 +21,7 @@ class PosttoStorageCommandHandler implements CommandHandler {
 	{
 		$post = $this->post->storePost(
 			$command->title,
-			$command->visible,
+			$command->isVisible,
 			$command->content
 		);
 

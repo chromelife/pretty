@@ -1,19 +1,20 @@
 <?php
 
-use Pretty\commanding\CommandBus;
+use Pretty\commanding\DefaultCommandBus;
 use Pretty\images\ImagetoStorageCommand;
+use Pretty\images\ImageUploadCommand;
+use Pretty\images\ImageDeleteCommand;
 
 class ImagesController extends BaseController {
 
-	protected $commandBus;
 	protected $image;
+	protected $DefaultCommandBus;
 
-	function __construct(CommandBus $commandBus, Image $image)
+	function __construct( DefaultCommandBus $commandBus, Image $image )
 	{
-		$this->commandBus = $commandBus;
 		$this->image = $image;
+		$this->commandBus = $commandBus;
 	}
-
 
 	/**
 	 * Display a listing of the images.
@@ -43,32 +44,32 @@ class ImagesController extends BaseController {
 	 */
 	public function store()
 	{
-		$input = Input::all();
+		// Grab form inputs and validate
+		$input = Input::only('title', 'isVisible');
+		$file = Input::file('image');
 		$validation = Validator::make($input, Image::$rules);
 		$destinationPath = '';
 		$filename = '';
 
 		if ($validation->passes())
-			{
-			
-			// image selected with picker
-			$file = Input::file('image'); 
-			// generate destination path for image
+		{
+			// generate path/grab filename
 			$destinationPath = public_path().'/Photos/';
-			// ensure image has recognisable filename
 			$filename = $file->getClientOriginalName();
+			
 			//write image to filesystem 
-			$file->move( $destinationPath, $filename ); 
+			$command = new ImageUploadCommand ( $file, $destinationPath, $filename );
+			$this->commandBus->execute($command);
+			
+			// Get input/url to add to DB
 			$image_url = '/Photos/' . $filename;
 			$title = $input['title'];
-			$visible = $input['visible'];
+			$isVisible = $input['isVisible'];
 			
 			// Store image in DB 
-			$command = new ImageToStorageCommand ($title, $visible, $image_url);
+			$command = new ImageToStorageCommand ($title, $isVisible, $image_url);
 			$this->commandBus->execute($command);
 
-			// return $command->visible;
-		
 			return Redirect::route('images.index');
 		}
 
@@ -76,7 +77,7 @@ class ImagesController extends BaseController {
 		return Redirect::route('images.create')
 			->withInput()
 			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->with('message', 'Check yourself before you wreck yourself.');
 	}
 
 	/**
@@ -131,7 +132,7 @@ class ImagesController extends BaseController {
 		return Redirect::route('images.edit', $id)
 			->withInput()
 			->withErrors($validation)
-			->with('message', 'There were validation errors.');
+			->with('message', 'Check yourself before you wreck yourself.');
 	}
 
 	/**
@@ -142,7 +143,10 @@ class ImagesController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		$this->image->find($id)->delete();
+	
+		$command = new ImageDeleteCommand($id);
+		$this->commandBus->execute($command);
+		// $this->image->find($id)->delete();
 
 		return Redirect::route('images.index');
 	}

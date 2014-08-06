@@ -9,26 +9,20 @@ class Post extends \Eloquent {
 	protected $fillable = array(
 		'title',
 		'content',
-		'visible'		
+		'isVisible'		
 	);
 	
 
-	public function storePost($title, $visible, $content)
+	public function storePost($title, $isVisible, $content)
 	{
-		// store image details in DB through Eloquent model
-		// $post = Post::create(array('title' => $title, 'visible' => $visible, 'content' => $content));
 		
 		$this->title = $title;
-		$this->isVisible = $visible;
+		$this->isVisible = $isVisible;
 		$this->content = $content;
-
-		// Log::info(var_dump($this->all()));
-
-		
 
 		$this->save();
 
-		// Fire a ImageWasStored event
+		// Fire a PostWasStored event
 		$this->raise(new PostWasStored($this));
 
 		return $this;

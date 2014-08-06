@@ -6,7 +6,7 @@ class pageViewController extends \BaseController {
 
 	public function constructPageView() {
 		$images = Image::where('isVisible', '=', '1')->get();
-		$posts = Post::where('visible', '=', '1')->get();
+		$posts = Post::where('isVisible', '=', '1')->get();
 		return View::make('hello', compact('images', 'posts'));
 	}
 

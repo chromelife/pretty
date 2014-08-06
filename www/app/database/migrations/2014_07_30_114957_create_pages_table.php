@@ -23,6 +23,7 @@ class CreatePagesTable extends Migration {
 
 // 		Schema::table('pages', function($table)
 // 		{
+	
 // 			$table->engine = 'InnoDB';
 // 			$table->foreign('image_id')->references('id')->on('images')->onUpdate('cascade')->onDelete('cascade');
 // 			$table->foreign('post_id')->references('id')->on('posts')->onUpdate('cascade')->onDelete('cascade');

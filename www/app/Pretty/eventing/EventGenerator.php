@@ -18,3 +18,4 @@ trait EventGenerator {
 		return $events;
 	}
 }
+

@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 		<meta name="viewport" content="width=device-width, initial-scale=1"> 
-		<title>Draggable Dual-View Slideshow</title>
+		<title>Pretty Demo</title>
 		<meta name="description" content="Draggable Dual-View Slideshow: A Slideshow with two views and content area" />
 		<meta name="keywords" content="draggable, slideshow, fullscreen, carousel, views, zoomed, 3d transform, perspective, dragdealer" />
 		<meta name="author" content="Mat (based off a CoDrops demo)" />
@@ -22,7 +22,7 @@
 				
 			</div>
 			<header id="header" class="codrops-header">
-				<h1>Draggable Dual-View Slideshow</h1>
+				<h1>Pretty Demo</h1>
 				<span class="message">This mobile version does not have the slideshow switch</span>
 				<button class="slider-switch">Switch view</button>
 			</header>
