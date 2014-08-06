@@ -16,7 +16,7 @@ class ImageUploadCommandHandler implements CommandHandler {
 
 	public function handle ( $command )
 	{
-		$image = $this->image->uploadImage($command->file,	$command->filename,	$command->destinationPath);
+		$image = $this->image->uploadImage( $command->file,	$command->filename,	$command->destinationPath );
 
 		$this->dispatcher->dispatch ( $image->releaseEvents() );
 	}

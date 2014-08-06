@@ -1,6 +1,6 @@
 <?php namespace Pretty\images;
 
-use Log;
+// use Log;
 
 class ImageWasStored {
 
@@ -9,9 +9,5 @@ class ImageWasStored {
 	function __construct( Image $image )
 	{
 		$this->image = $image;
-		
 	}
-
-
-
 }

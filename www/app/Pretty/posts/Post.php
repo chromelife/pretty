@@ -1,29 +1,20 @@
 <?php namespace Pretty\posts
+
 use Pretty\eventing\EventGenerator;
-use Log;
+// use Log;
 
 class Post extends \Eloquent {
 
 	use EventGenerator;
 
-	protected $fillable = array(
-		'title',
-		'content',
-		'isVisible'		
-	);
+	protected $fillable = [ 'title', 'content', 'isVisible'	];
 	
-
-	public function storePost($title, $isVisible, $content)
+	public static function storePost( $title, $isVisible, $content )
 	{
-		
-		$this->title = $title;
-		$this->isVisible = $isVisible;
-		$this->content = $content;
-
-		$this->save();
+		$post = static::create( compact( 'title', 'isVisible', 'content' ));
 
 		// Fire a PostWasStored event
-		$this->raise(new PostWasStored($this));
+		$post->raise(new PostWasStored( $this ));
 
 		return $this;
 	}

@@ -1,16 +1,17 @@
 <?php
 
-use Pretty\commanding\DefaultCommandBus;
+use Pretty\commanding\ValidationCommandBus;
 use Pretty\images\ImagetoStorageCommand;
 use Pretty\images\ImageUploadCommand;
 use Pretty\images\ImageDeleteCommand;
+// use Pretty\images\ImagetoStorageValidator;
 
 class ImagesController extends BaseController {
 
 	protected $image;
-	protected $DefaultCommandBus;
+	protected $commandBus;
 
-	function __construct( DefaultCommandBus $commandBus, Image $image )
+	function __construct( ValidationCommandBus $commandBus, Image $image )
 	{
 		$this->image = $image;
 		$this->commandBus = $commandBus;
@@ -21,10 +22,11 @@ class ImagesController extends BaseController {
 	 *
 	 * @return Response
 	 */
+	
 	public function index()
 	{
 		$images = $this->image->all();
-		return View::make('images.index', compact('images'));
+		return View::make( 'images.index', compact( 'images' ) );
 	}
 
 	/**
@@ -32,9 +34,10 @@ class ImagesController extends BaseController {
 	 *
 	 * @return View
 	 */
+	
 	public function create()
 	{
-		return View::make('images.create');
+		return View::make( 'images.create' );
 	}
 
 	/**
@@ -42,42 +45,45 @@ class ImagesController extends BaseController {
 	 *
 	 * @return Response
 	 */
+	
 	public function store()
 	{
 		// Grab form inputs and validate
-		$input = Input::only('title', 'isVisible');
-		$file = Input::file('image');
-		$validation = Validator::make($input, Image::$rules);
+		$input = Input::only( 'title', 'isVisible' );
+		$file = Input::file( 'image' );
+		// $validation = Validator::make($input, Image::$rules);
+		// $command =  new ImagetoStorageValidator ( $input );
+		// $this->commandBus->execute( $command );
 		$destinationPath = '';
 		$filename = '';
 
-		if ($validation->passes())
-		{
+		// if ( $validation->passes() )
+		// {
 			// generate path/grab filename
 			$destinationPath = public_path().'/Photos/';
 			$filename = $file->getClientOriginalName();
 			
 			//write image to filesystem 
 			$command = new ImageUploadCommand ( $file, $destinationPath, $filename );
-			$this->commandBus->execute($command);
+			$this->commandBus->execute( $command );
 			
 			// Get input/url to add to DB
 			$image_url = '/Photos/' . $filename;
-			$title = $input['title'];
-			$isVisible = $input['isVisible'];
+			$title = $input[ 'title' ];
+			$isVisible = $input[ 'isVisible' ];
 			
 			// Store image in DB 
-			$command = new ImageToStorageCommand ($title, $isVisible, $image_url);
-			$this->commandBus->execute($command);
+			$command = new ImageToStorageCommand ( $title, $isVisible, $image_url );
+			$this->commandBus->execute( $command );
 
-			return Redirect::route('images.index');
-		}
+			return Redirect::route( 'images.index' );
+		// }
 
 		// Show a message if upload does not validate against rules
-		return Redirect::route('images.create')
-			->withInput()
-			->withErrors($validation)
-			->with('message', 'Check yourself before you wreck yourself.');
+		// return Redirect::route( 'images.create' )
+		// 	->withInput()
+		// 	->withErrors($validation)
+		// 	->with( 'message', 'Check yourself before you wreck yourself.' );
 	}
 
 	/**
@@ -86,10 +92,11 @@ class ImagesController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	
+	public function show( $id )
 	{
-		$image = $this->image->findOrFail($id);
-		return View::make('images.show', compact('image'));
+		$image = $this->image->findOrFail( $id );
+		return View::make( 'images.show', compact( 'image' ) );
 	}
 
 	/**
@@ -98,16 +105,17 @@ class ImagesController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	
+	public function edit( $id )
 	{
-		$image = $this->image->find($id);
+		$image = $this->image->find( $id );
 
-		if (is_null($image))
+		if (is_null( $image ))
 		{
-			return Redirect::route('images.index');
+			return Redirect::route( 'images.index' );
 		}
 
-		return View::make('images.edit', compact('image'));
+		return View::make( 'images.edit', compact( 'image' ) );
 	}
 
 	/**
@@ -116,23 +124,24 @@ class ImagesController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	
+	public function update( $id )
 	{
-		$input = array_except(Input::all(), '_method');
-		$validation = Validator::make($input, Image::$rules);
+		$input = array_except( Input::all(), '_method' );
+		$validation = Validator::make( $input, Image::$rules );
 
-		if ($validation->passes())
+		if ( $validation->passes() )
 		{
-			$image = $this->image->find($id);
+			$image = $this->image->find( $id );
 			$image->update($input);
 
-			return Redirect::route('images.show', $id);
+			return Redirect::route( 'images.show', $id );
 		}
 
-		return Redirect::route('images.edit', $id)
+		return Redirect::route( 'images.edit', $id )
 			->withInput()
-			->withErrors($validation)
-			->with('message', 'Check yourself before you wreck yourself.');
+			->withErrors( $validation )
+			->with( 'message', 'Check yourself before you wreck yourself.' );
 	}
 
 	/**
@@ -141,14 +150,13 @@ class ImagesController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
 	
-		$command = new ImageDeleteCommand($id);
-		$this->commandBus->execute($command);
-		// $this->image->find($id)->delete();
-
-		return Redirect::route('images.index');
+	public function destroy( $id )
+	{
+		$command = new ImageDeleteCommand( $id );
+		$this->commandBus->execute( $command );
+	
+		return Redirect::route( 'images.index' );
 	}
 
 }

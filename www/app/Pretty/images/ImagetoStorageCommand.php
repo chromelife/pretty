@@ -1,16 +1,16 @@
 <?php namespace Pretty\images;
 
-use Log;
+// use Log;
 
 class ImageToStorageCommand {
 	
-	 
-
 	public $title;
+
 	public $isVisible;
+
 	public $image_url;
 
-	function __construct($title, $isVisible, $image_url)
+	function __construct( $title, $isVisible, $image_url )
 	{
 		$this->title = $title;
 		$this->isVisible = $isVisible; 

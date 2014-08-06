@@ -9,7 +9,6 @@ class ImagetoStorageCommandHandler implements CommandHandler {
 	protected $image;
 	protected $dispatcher;
 
-
 	function __construct( Image $image, EventDispatcher $dispatcher)
 	{
 		$this->image = $image;
@@ -24,7 +23,6 @@ class ImagetoStorageCommandHandler implements CommandHandler {
 			$command->isVisible,
 			$command->image_url
 		);
-
 		
 		// Dispatch events
 		$this->dispatcher->dispatch( $image->releaseEvents() );

@@ -9,7 +9,6 @@ class PosttoStorageCommandHandler implements CommandHandler {
 	protected $post;
 	protected $dispatcher;
 
-
 	function __construct( Post $post, EventDispatcher $dispatcher)
 	{
 		$this->post = $post;
@@ -27,7 +26,6 @@ class PosttoStorageCommandHandler implements CommandHandler {
 
 		// Dispatch events
 		$this->dispatcher->dispatch( $post->releaseEvents() );
-		
 	}
 
 }

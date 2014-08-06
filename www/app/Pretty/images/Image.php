@@ -1,16 +1,15 @@
 <?php namespace Pretty\images;
 
 use Pretty\eventing\EventGenerator;
-// use Log;
 use File;
 
 class Image extends \Eloquent {
 
 	use EventGenerator;
 
-	protected $fillable = ['image_url', 'title', 'isVisible'];
+	protected $fillable = [ 'image_url', 'title', 'isVisible' ];
 	
-	public function uploadImage($file, $destinationPath, $filename)
+	public function uploadImage( $file, $destinationPath, $filename )
 	{
 		$this->file = $file;
 		$this->destinationPath = $destinationPath;
@@ -23,8 +22,7 @@ class Image extends \Eloquent {
 		return $this;
 	}
 
-
-	public static function storeImage($title, $isVisible, $image_url)
+	public static function storeImage( $title, $isVisible, $image_url )
 	{
 		// store image details in DB through Eloquent model
 		$image = static::create( compact( 'title', 'image_url', 'isVisible' ));
@@ -37,13 +35,14 @@ class Image extends \Eloquent {
 
 	public function deleteImage()
 	{
-		// $this->files->delete(public_path() . $image->image_url);
 		$file = public_path() . $this->image_url;
+		// Using File facade to delete file from filesystem (I got a bit confused here)
 		File::delete($file);
+		// removing image record from table
 		$this->delete();
 
 		//Fire a event
-		$this->raise ( new ImageWasDeleted($this) );
+		$this->raise ( new ImageWasDeleted( $this ) );
 
 		return $this;
 	}

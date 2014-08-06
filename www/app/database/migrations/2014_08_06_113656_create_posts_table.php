@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('title');
-			$table->string('content');
+			$table->string('content' , 8000);
 			$table->boolean('isVisible');
 			$table->timestamps();
 		});
