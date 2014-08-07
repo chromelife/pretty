@@ -35,6 +35,8 @@ class Post extends \Eloquent {
 		$this->post->find( $id );
 		$post->update($command->input);
 
+		$post->raise( new PostWasUpdated( $post ))
+
 	}
 
 }
