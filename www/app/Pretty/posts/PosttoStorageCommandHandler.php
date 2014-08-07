@@ -2,7 +2,7 @@
 
 use Pretty\Commanding\CommandHandler;
 use Pretty\eventing\EventDispatcher;
-use Log;
+// use Log;
 
 class PosttoStorageCommandHandler implements CommandHandler {
 
@@ -12,17 +12,13 @@ class PosttoStorageCommandHandler implements CommandHandler {
 	function __construct( Post $post, EventDispatcher $dispatcher)
 	{
 		$this->post = $post;
-		$this->dispatcher = $post;
+		$this->dispatcher = $dispatcher;
 		
 	}
 
 	public function handle( $command )
 	{
-		$post = $this->post->storePost(
-			$command->title,
-			$command->isVisible,
-			$command->content
-		);
+		$post = Post::storePost( $command->title, $command->isVisible, $command->content );
 
 		// Dispatch events
 		$this->dispatcher->dispatch( $post->releaseEvents() );

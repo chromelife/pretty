@@ -8,18 +8,17 @@ class DefaultCommandBus implements CommandBus {
 
 	protected $commandTranslator;
 
-	function __construct(Application $app, CommandTranslator $commandTranslator)
+	function __construct( Application $app, CommandTranslator $commandTranslator )
 	{
 		$this->app = $app;
 		$this->commandTranslator = $commandTranslator;
 	}
 
-
-	public function execute($command)
+	public function execute( $command )
 	{
 		// translate object name to handler class
-		$handler = $this->commandTranslator->toCommandHandler($command);
+		$handler = $this->commandTranslator->toCommandHandler( $command );
 		// resolve out of IOC container and call handle method
-		return $this->app->make($handler)->handle($command);
+		return $this->app->make( $handler )->handle( $command );
 	}
 }

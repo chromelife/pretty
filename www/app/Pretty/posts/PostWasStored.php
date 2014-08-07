@@ -1,6 +1,6 @@
 <?php namespace Pretty\posts;
 
-use Log;
+// use Log;
 
 class PostWasStored {
 

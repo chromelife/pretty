@@ -2,9 +2,7 @@
 
 use Pretty\commanding\ValidationCommandBus;
 use Pretty\images\ImagetoStorageCommand;
-use Pretty\images\ImageUploadCommand;
 use Pretty\images\ImageDeleteCommand;
-// use Pretty\images\ImagetoStorageValidator;
 
 class ImagesController extends BaseController {
 
@@ -48,26 +46,14 @@ class ImagesController extends BaseController {
 	
 	public function store()
 	{
-		// Grab form inputs and validate
+		// Grab form inputs
 		$input = Input::only( 'title', 'isVisible' );
 		$file = Input::file( 'image' );
-		$destinationPath = public_path().'/Photos/';
-		$filename = '';
-	
-		//grab filename
-		// $filename = $file->getClientOriginalName();
-		
-		//write image to filesystem 
-		$command = new ImageUploadCommand ( $file, $destinationPath, $filename );
-		$this->commandBus->execute( $command );
-		
-		// Get input/url to add to DB
-		$image_url = '/Photos/' . $filename;
 		$title = $input[ 'title' ];
 		$isVisible = $input[ 'isVisible' ];
 		
 		// Store image in DB 
-		$command = new ImageToStorageCommand ( $title, $isVisible, $image_url );
+		$command = new ImageToStorageCommand ( $title, $isVisible, $file );
 		$this->commandBus->execute( $command );
 
 		return Redirect::route( 'images.index' );
@@ -115,20 +101,22 @@ class ImagesController extends BaseController {
 	public function update( $id )
 	{
 		$input = array_except( Input::all(), '_method' );
-		$validation = Validator::make( $input, Image::$rules );
+		// $validation = Validator::make( $input, Image::$rules );
 
-		if ( $validation->passes() )
-		{
-			$image = $this->image->find( $id );
-			$image->update($input);
+		$command = new UpdateImageCommand($input);
+		$this->commandBus->execute($command);
+		// if ( $validation->passes() )
+		// {
+		// 	$image = $this->image->find( $id );
+		// 	$image->update($input);
 
-			return Redirect::route( 'images.show', $id );
-		}
+		return Redirect::route( 'images.show', $id );
+		// }
 
-		return Redirect::route( 'images.edit', $id )
-			->withInput()
-			->withErrors( $validation )
-			->with( 'message', 'Check yourself before you wreck yourself.' );
+		// return Redirect::route( 'images.edit', $id )
+		// 	->withInput()
+		// 	->withErrors( $validation )
+		// 	->with( 'message', 'Check yourself before you wreck yourself.' );
 	}
 
 	/**

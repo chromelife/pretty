@@ -1,30 +1,26 @@
 <?php namespace Pretty\images;
 
 use Validator;
+use Redirect;
+use Pretty\validation\ValidationException;
 
 class ImagetoStorageValidator {
 
 	public function validate( ImagetoStorageCommand $command )
 	{
 		$validator = Validator::make([
+			'image' => $command->file,
 			'title' => $command->title,
-			'isVisible' => $command->isVisible,
+			'isVisible' => $command->isVisible
 		],[
+			'image' => 'image|required',
 			'title' => 'required',
 			'isVisible' => 'required'
 			]);
 
-		// return $validation;
-
 		if ($validator->fails())
 		{
-			$title = $command->title;
-			$isVisible = $command->isVisible;
-
-			return Redirect::route( 'images.create' )
-			->withInput($title, $isVisible)
-			->withErrors($validation)
-			->with( 'message', 'Check yourself before you wreck yourself.' );
+			throw new ValidationException($validator->messages());
 		}
 	}
 	

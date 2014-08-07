@@ -10,10 +10,10 @@ class ImageToStorageCommand {
 
 	public $image_url;
 
-	function __construct( $title, $isVisible, $image_url )
+	function __construct( $title, $isVisible, $file )
 	{
 		$this->title = $title;
 		$this->isVisible = $isVisible; 
-		$this->image_url = $image_url;
+		$this->file = $file;
 	}
 }

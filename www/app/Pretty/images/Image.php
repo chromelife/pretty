@@ -9,22 +9,14 @@ class Image extends \Eloquent {
 
 	protected $fillable = [ 'image_url', 'title', 'isVisible' ];
 	
-	public function uploadImage( $file, $destinationPath, $filename ) 
+	public static function storeImage( $title, $isVisible, $file )
 	{
-		$this->file = $file;
-		$this->destinationPath = $destinationPath;
-		// $this->filename = $filename;
-		$this->filename = $file->getClientOriginalName();
-		$file->move( $destinationPath, $filename );
+		// Save image to server filesystem
+		$filename = $file->getClientOriginalName();
+		$destinationPath = public_path() . '/Photos/';
+		$image_url = $destinationPath . $filename;
+		$file->move ( $image_url);
 
-		// Fire a event
-		$this->raise(new ImageWasUploaded( $this ));
-
-		return $this;
-	}
-
-	public static function storeImage( $title, $isVisible, $image_url )
-	{
 		// store image details in DB through Eloquent model
 		$image = static::create( compact( 'title', 'image_url', 'isVisible' ));
 				
@@ -46,6 +38,12 @@ class Image extends \Eloquent {
 		$this->raise ( new ImageWasDeleted( $this ) );
 
 		return $this;
+	}
+
+	public function updateImage()
+	{
+		$this->image->findOrFail();
+		$image->update($input);
 	}
 
 }

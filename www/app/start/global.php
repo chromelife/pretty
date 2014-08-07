@@ -51,6 +51,12 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+App::error(function(Pretty\Validation\ValidationException $exception)
+{
+	Log::error($exception);
+	return Redirect::back()->withErrors($exception->getErrors())->withInput();
+});
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler

@@ -21,7 +21,7 @@ class ImagetoStorageCommandHandler implements CommandHandler {
 		$image = $this->image->storeImage(
 			$command->title,
 			$command->isVisible,
-			$command->image_url
+			$command->file
 		);
 		
 		// Dispatch events

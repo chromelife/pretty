@@ -1,14 +1,17 @@
 <?php
 
+use Pretty\commanding\ValidationCommandBus;
 use Pretty\posts\PosttoStorageCommand;
+use Pretty\posts\PostDeleteCommand;
 
 class PostsController extends \BaseController {
-
 	
 	protected $post;
+	protected $commandBus;
 
-	function __construct( Post $post )
+	function __construct(ValidationCommandBus $commandBus, Post $post )
 	{
+		$this->commandBus = $commandBus;
 		$this->post = $post;
 	}
 
@@ -41,22 +44,15 @@ class PostsController extends \BaseController {
 	 */
 	public function store()
 	{
-		// Get input and validate
+		// Get input
 		$input = Input::all();
-		$validator = Validator::make($data = Input::all(), Post::$rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
-		
-		// Take inputs and add new post to db
+				
+		// Take inputs, validate, and add new post to db if they pass
 		$title = $input['title'];
 		$content = $input['content'];
 		$isVisible = $input['isVisible'];
 		$command = new PosttoStorageCommand ($title, $isVisible, $content);
-		$this->commandBus->execute($command);
-		
+		$this->commandBus->execute($command);	
 		return Redirect::route('posts.index');
 	}
 
@@ -116,7 +112,8 @@ class PostsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		Post::destroy($id);
+		$command = new PostDeleteCommand( $id );
+		$this->commandBus->execute( $command );
 
 		return Redirect::route('posts.index');
 	}
