@@ -7,7 +7,7 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	<link href="/fonts/standard/ss-standard.css" rel="stylesheet" type="text/css" media="all" />
-	<link href="/site.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="site.css" rel="stylesheet" type="text/css" media="all" />
 	<!-- <link href="/bootstrap.css" rel="stylesheet" type="text/css" media="all" />	 -->
 	
 

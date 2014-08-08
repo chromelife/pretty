@@ -2,9 +2,9 @@
 
 use Pretty\Commanding\CommandHandler;
 use Pretty\eventing\EventDispatcher;
-use Log;
+// use Log;
 
-class ImagetoStorageCommandHandler implements CommandHandler {
+class ImageUpdateCommandHandler implements CommandHandler {
 
 	protected $image;
 	protected $dispatcher;
@@ -18,11 +18,11 @@ class ImagetoStorageCommandHandler implements CommandHandler {
 
 	public function handle( $command )
 	{
-		$image = $this->image->storeImage(
+		$image = $this->image->updateImage(
+			$command->id,
 			$command->title,
-			$command->isVisible,
-			$command->file
-			
+			$command->isVisible
+						
 		);
 		
 		// Dispatch events

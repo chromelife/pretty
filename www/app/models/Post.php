@@ -6,7 +6,7 @@ class Post extends \Eloquent {
 	public static $rules = array(
 		'title' 	=> 'required',
 		'content' 	=> 'required',
-		'isVisible' => 'required'
+		'isVisible' => 'required|boolean'
 	);
 
 	// Don't forget to fill this array

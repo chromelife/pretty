@@ -23,7 +23,7 @@ class EventDispatcher {
 
 			$this->event->fire( $eventName, $event );
 
-			$this->log->info( "$eventName was fired." );
+			$this->log->info( "$eventName was fired" );
 		}
 	}
 

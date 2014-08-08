@@ -1,21 +1,18 @@
 <?php namespace Pretty\images;
 
 use Validator;
-use File;
 // use Log;
 
 use Pretty\validation\ValidationException;
 
-class ImagetoStorageValidator {
+class ImageUpdateValidator {
 
-	public function validate( ImagetoStorageCommand $command )
+	public function validate( ImageUpdateCommand $command )
 	{
 		$validator = Validator::make([
-			'image' => $command->file,
 			'title' => $command->title,
 			'isVisible' => $command->isVisible
 		],[
-			'image' => 'image|required',
 			'title' => 'required',
 			'isVisible' => 'required|boolean'
 			]);
@@ -27,4 +24,3 @@ class ImagetoStorageValidator {
 	}
 	
 }
-

@@ -1,9 +1,7 @@
 <?php namespace Pretty\posts;
 
-// use Log;
-
-class PostWasStored {
-
+class PostWasUpdated {
+	
 	public $post;
 
 	function __construct( Post $post )
@@ -12,4 +10,4 @@ class PostWasStored {
 		
 	}
 
-}
+}	

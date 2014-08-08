@@ -30,7 +30,7 @@
 		<tbody>
 			@foreach ($images as $image)
 				<tr>
-					<td>{{{ $image->image_url }}}</td>
+					<td><a href="/images/{{ $image->id}}"/>{{$image->image_url}}</td>
 					<td>{{{ $image->title }}}</td>
 					<td>{{{ $image->isVisible }}}</td>
                     <td>{{ link_to_route('images.edit', 'Edit', array($image->id), array('class' => 'btn btn-info')) }}</td>

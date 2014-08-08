@@ -14,8 +14,8 @@ class Image extends \Eloquent {
 		// Save image to server filesystem
 		$filename = $file->getClientOriginalName();
 		$destinationPath = public_path() . '/Photos/';
-		$image_url = $destinationPath . $filename;
-		$file->move ( $image_url);
+		$image_url = '/Photos/' . $filename;
+		$file = $file->move ( $destinationPath , $filename );
 
 		// store image details in DB through Eloquent model
 		$image = static::create( compact( 'title', 'image_url', 'isVisible' ));
@@ -40,12 +40,16 @@ class Image extends \Eloquent {
 		return $this;
 	}
 
-	public function updateImage()
+	public function updateImage( $id, $title, $isVisible )
 	{
-		$this->image->findOrFail();
-		$image->update($input);
+		$image = $this->findOrFail($id);
+		$image->title = $title;
+		$image->isVisible = $isVisible;
+		$image->update();
 
-		$this->raise ( new ImageWasUpdated( $this ) );
+		$image->raise( new ImageWasUpdated( $image ) );
+
+		return $image;
 	}
 
 }

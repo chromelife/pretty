@@ -3,6 +3,7 @@
 use Pretty\commanding\ValidationCommandBus;
 use Pretty\posts\PosttoStorageCommand;
 use Pretty\posts\PostDeleteCommand;
+use Pretty\posts\PostUpdateCommand;
 
 class PostsController extends \BaseController {
 	
@@ -90,16 +91,13 @@ class PostsController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		$post = Post::findOrFail($id);
+		$input = Input::all();
+		$title = $input['title'];		
+		$content = $input['content'];
+		$isVisible = $input['isVisible'];
 
-		$validator = Validator::make($data = Input::all(), Post::$rules);
-
-		if ($validator->fails())
-		{
-			return Redirect::back()->withErrors($validator)->withInput();
-		}
-
-		$post->update($data);
+		$command = new PostUpdateCommand( $id, $title, $content, $isVisible );
+		$this->commandBus->execute( $command ); 
 
 		return Redirect::route('posts.index');
 	}

@@ -30,12 +30,18 @@ class Post extends \Eloquent {
 		return $this;
 	}
 
-	public function updatePost () {
+	public function updatePost ( $id, $title, $content, $isVisible ) {
 
-		$this->post->find( $id );
-		$post->update($command->input);
+		//Get post from id and update with input
+		$post = $this->findOrFail( $id );
+		$post->title = $title;
+		$post->content = $content;
+		$post->isVisible = $isVisible;
+		$post->update();
 
-		$post->raise( new PostWasUpdated( $post ))
+		$post->raise( new PostWasUpdated( $post ));
+
+		return $post;
 
 	}
 

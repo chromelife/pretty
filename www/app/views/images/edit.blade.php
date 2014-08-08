@@ -6,11 +6,6 @@
 {{ Form::model($image, array('method' => 'PATCH', 'route' => array('images.update', $image->id))) }}
 	<ul>
         <li>
-            {{ Form::label('image_url', 'Image url:') }}
-            {{ Form::text('image_url') }}
-        </li>
-
-        <li>
             {{ Form::label('title', 'Title:') }}
             {{ Form::text('title') }}
         </li>
@@ -24,10 +19,10 @@
 			{{ Form::submit('Update', array('class' => 'btn btn-info')) }}
 			{{ link_to_route('images.show', 'Cancel', $image->id, array('class' => 'btn')) }}
 		</li>
-        <li>
+    </ul>
+    <div>
             <img src="{{ $image->image_url }}" alt="" />
-        </li>
-	</ul>
+    </div>
 {{ Form::close() }}
 
 @if ($errors->any())

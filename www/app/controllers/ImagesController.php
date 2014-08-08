@@ -2,6 +2,7 @@
 
 use Pretty\commanding\ValidationCommandBus;
 use Pretty\images\ImagetoStorageCommand;
+use Pretty\images\ImageUpdateCommand;
 use Pretty\images\ImageDeleteCommand;
 
 class ImagesController extends BaseController {
@@ -51,8 +52,8 @@ class ImagesController extends BaseController {
 		$file = Input::file( 'image' );
 		$title = $input[ 'title' ];
 		$isVisible = $input[ 'isVisible' ];
-		
-		// Store image in DB 
+				
+		// Store image in DB and filesystem
 		$command = new ImageToStorageCommand ( $title, $isVisible, $file );
 		$this->commandBus->execute( $command );
 
@@ -100,9 +101,13 @@ class ImagesController extends BaseController {
 	
 	public function update( $id )
 	{
+		// Grab inputs from edit form
 		$input = array_except( Input::all(), '_method' );
+		$title = $input['title'];
+		$isVisible = $input['isVisible'];
 		
-		$command = new UpdateImageCommand($input);
+		// perform update on Images table
+		$command = new ImageUpdateCommand($id, $title, $isVisible);
 		$this->commandBus->execute($command);
 		
 		return Redirect::route( 'images.show', $id );
