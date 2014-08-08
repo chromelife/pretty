@@ -101,22 +101,11 @@ class ImagesController extends BaseController {
 	public function update( $id )
 	{
 		$input = array_except( Input::all(), '_method' );
-		// $validation = Validator::make( $input, Image::$rules );
-
+		
 		$command = new UpdateImageCommand($input);
 		$this->commandBus->execute($command);
-		// if ( $validation->passes() )
-		// {
-		// 	$image = $this->image->find( $id );
-		// 	$image->update($input);
-
+		
 		return Redirect::route( 'images.show', $id );
-		// }
-
-		// return Redirect::route( 'images.edit', $id )
-		// 	->withInput()
-		// 	->withErrors( $validation )
-		// 	->with( 'message', 'Check yourself before you wreck yourself.' );
 	}
 
 	/**

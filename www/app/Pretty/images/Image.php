@@ -44,6 +44,8 @@ class Image extends \Eloquent {
 	{
 		$this->image->findOrFail();
 		$image->update($input);
+
+		$this->raise ( new ImageWasUpdated( $this ) );
 	}
 
 }
