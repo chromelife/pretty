@@ -14,5 +14,8 @@ class Image extends \Eloquent {
 		
 	);
 
-
+	public function page ()
+	{
+		return $this->belongsTo('Page');
+	}
 }

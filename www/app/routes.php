@@ -15,5 +15,15 @@ Route::resource( 'images',	'ImagesController' );
 
 Route::resource( 'posts',	'PostsController' );
 
+Route::resource( 'pages',	'PagesController' );
+
 Route::get( '/', 'pageViewController@constructPageView');
+
+Route::get('pagestest', function()
+{
+	foreach(Page::with('image', 'post')->get() as $page)
+	{
+		dd( $page->image, $page->post );
+	}
+});
 

@@ -1,20 +1,23 @@
 <?php
 
-// Composer: "fzaninotto/faker": "v1.4.0"
-use Faker\Factory as Faker;
-
 class PagesTableSeeder extends Seeder {
 
 	public function run()
-	{
-		$faker = Faker::create();
+	{	
+		$pages = [
+			['image_id'=> '1', 'post_id' => '1'],
+			['image_id'=> '2', 'post_id' => '2'],
+			['image_id'=> '3', 'post_id' => '3'],
+			['image_id'=> '4', 'post_id' => '4'],
+			['image_id'=> '5', 'post_id' => '5'],
+			['image_id'=> '6', 'post_id' => '6'],
+			['image_id'=> '7', 'post_id' => '7'],
+			['image_id'=> '8', 'post_id' => '8']
 
-		foreach(range(1, 10) as $index)
-		{
-			Page::create([
+		];
 
-			]);
-		}
+
+		DB::table('pages')->insert($pages);	
 	}
 
 }

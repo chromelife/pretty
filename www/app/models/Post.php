@@ -16,4 +16,8 @@ class Post extends \Eloquent {
 		'isVisible'
 	);
 
+	public function page ()
+	{
+		return $this->belongsTo('Page');
+	}
 }

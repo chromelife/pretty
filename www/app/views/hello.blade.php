@@ -4,10 +4,10 @@
 	<div id="slideshow" class="dragslider">
 		<section class="img-dragger img-dragger-large dragdealer">
 			<div class="handle">
-				@foreach ($images as $image)
-					<div class="slide" data-content="content-{{$image->title}}">
-					<div class="img-wrap"><img src="{{$image->image_url}}" alt=""/></div>
-					<h2>Title Not Working Yet<span>Cause I didn't account for it really</span></h2>
+				@foreach ($pages as $page)
+					<div class="slide" data-content="content-{{$page->page_id}}">
+					<div class="img-wrap"><img src="{{$page->image->image_url}}" alt=""/></div>
+					<h2>{{$page->post->title}}<span>Subtitle? oh you needed that?</span></h2>
 					<button class="content-switch">Read more</button>
 				</div>
 				@endforeach
@@ -17,10 +17,10 @@
 		<!-- Content section -->
 		
 		<section class="pages">
-		@foreach ($posts as $post)
-			<div class="content" data-content="content-{{$post->id}}">
-				<h2>{{$post->title}}</h2>
-				<p>{{$post->content}}</p>
+		@foreach ($pages as $page)
+			<div class="content" data-content="content-{{$page->page_id}}">
+				<h2>{{$page->post->title}}</h2>
+				<p>{{$page->post->content}}</p>
 				<p class="related">
 				Foo!
 				</p>

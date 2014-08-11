@@ -20,6 +20,11 @@ class CreateImagesTable extends Migration {
 			$table->boolean('isVisible');
 			$table->timestamps();
 		});
+
+		// Schema::table('images', function($table)
+		// {
+		// 	$table->foreign('page_id')->references('id')->on('pages')->onUpdate('cascade')->onDelete('cascade');
+		// });
 	}
 
 
