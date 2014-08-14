@@ -20,7 +20,8 @@ class PageStorageCommandHandler implements CommandHandler {
 	{
 		$page = $this->page->storePage(
 			$command->image_id,
-			$command->post_id
+			$command->post_id,
+			$command->isVisible
 			
 		);
 		

@@ -18,6 +18,6 @@ class Post extends \Eloquent {
 
 	public function page ()
 	{
-		return $this->belongsTo('Page');
+		return $this->belongsTo('Page', 'page_id');
 	}
 }

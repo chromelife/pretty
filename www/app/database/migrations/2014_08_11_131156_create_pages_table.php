@@ -14,6 +14,7 @@ class CreatePagesTable extends Migration {
 			$table->timestamps();
 			$table->unsignedInteger('image_id');
 			$table->unsignedInteger('post_id');
+			$table->boolean('isVisible');
 		});
 
 		Schema::table('pages', function($table)

@@ -23,7 +23,7 @@ Route::get('pagestest', function()
 {
 	foreach(Page::with('image', 'post')->get() as $page)
 	{
-		dd( $page->image, $page->post );
+		var_dump( $page->image->image_url, $page->post->title);
 	}
 });
 

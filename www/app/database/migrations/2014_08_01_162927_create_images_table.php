@@ -18,6 +18,7 @@ class CreateImagesTable extends Migration {
 			$table->string('image_url');
 			$table->string('title');
 			$table->boolean('isVisible');
+			$table->unsignedInteger('page_id');
 			$table->timestamps();
 		});
 

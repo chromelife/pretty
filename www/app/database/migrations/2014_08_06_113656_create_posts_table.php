@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration {
 			$table->string('title');
 			$table->string('content' , 8000);
 			$table->boolean('isVisible');
+			$table->unsignedInteger('page_id');
 			$table->timestamps();
 		});
 

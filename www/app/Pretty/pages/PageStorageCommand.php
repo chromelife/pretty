@@ -8,10 +8,13 @@ class PageStorageCommand {
 
 	public $post_id;
 
-	function __construct( $image_id, $post_id )
+	public $isVisible;
+
+	function __construct( $image_id, $post_id, $isVisible )
 	{
 		$this->image_id = $image_id;
 		$this->post_id = $post_id; 
+		$this->isVisible = $isVisible;
 				
 	}
 }

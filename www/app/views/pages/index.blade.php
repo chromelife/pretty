@@ -23,6 +23,7 @@
 				<th>Page Id</th>
 				<th>Image</th>
 				<th>Post</th>
+				<th>Is Visible?</th>
 				
 			</tr>
 		</thead>
@@ -33,6 +34,7 @@
 					<td>{{{ $page->id }}}</td>
 					<td>{{{ $page->image->image_url }}}</td>
 					<td>{{{ $page->post->title }}}</td>
+					<td>{{{ $page->isVisible }}}</td>
                     <td>{{ link_to_route('pages.edit', 'Edit', array($page->id), array('class' => 'btn btn-info')) }}</td>
                     <td>
                         {{ Form::open(array('method' => 'DELETE', 'route' => array('pages.destroy', $page->id))) }}

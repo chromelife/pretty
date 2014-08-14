@@ -109,6 +109,7 @@ return array(
 		'Way\Generators\GeneratorsServiceProvider',
 		'Pretty\Eventing\EventServiceProvider',
 		
+		
 
 	),
 

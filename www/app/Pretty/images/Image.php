@@ -7,7 +7,9 @@ class Image extends \Eloquent {
 
 	use EventGenerator;
 
-	protected $fillable = [ 'image_url', 'title', 'isVisible' ];
+	protected $fillable = [ 'image_url', 'title', 'isVisible', 'page_id' ];
+
+	
 	
 	public static function storeImage( $title, $isVisible, $file )
 	{

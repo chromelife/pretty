@@ -17,6 +17,12 @@
             {{ Form::select('post_id', $pagePosts ) }}
         </li>
 
+        <li>
+            {{ Form::label('isVisible', 'Is Visible?') }}
+            {{ Form::text('isVisible') }}
+        </li>
+
+
 		<li>
 			{{ Form::submit('Submit', array('class' => 'btn btn-info')) }}
 		</li>

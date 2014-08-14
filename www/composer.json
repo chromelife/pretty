@@ -7,7 +7,7 @@
 		"laravel/framework": "4.2.*",
 		"way/generators":"dev-master",
 		"laravelbook/ardent":"dev-master",
-		"fzaninotto/faker": "1.2.*@dev"
+		"maximebf/debugbar":">=1.0.0"
 	},
 	"autoload": {
 		"classmap": [

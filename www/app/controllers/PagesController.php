@@ -51,13 +51,13 @@ class PagesController extends \BaseController {
 	 */
 	public function store()
 	{
-		// dd(Input::all());
-		$input = Input::only('image_id', 'post_id');
+		$input = Input::only('image_id', 'post_id', 'isVisible');
 		$image_id = $input['image_id'];
 		$post_id = $input['post_id'];
+		$isVisible = $input['isVisible'];
 
-		$command = new PageStorageCommand ($image_id, $post_id);
-		$this->commandBus->execute($command);
+		$command = new PageStorageCommand ( $image_id, $post_id, $isVisible );
+		$this->commandBus->execute( $command );
 		
 		return Redirect::route( 'pages.index' );
 	}
