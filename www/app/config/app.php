@@ -108,8 +108,9 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Way\Generators\GeneratorsServiceProvider',
 		'Pretty\Eventing\EventServiceProvider',
-		
-		
+		'Barryvdh\Debugbar\ServiceProvider',
+
+
 
 	),
 

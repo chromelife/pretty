@@ -2,14 +2,11 @@
 
 class Page extends \Eloquent {
 
-	public function post()
-	{
+	public function post(){
 		return $this->hasOne('Post');
 	}
 
-	public function image()
-	{
+	public function image(){
 		return $this->hasOne('Image');
 	}
 }
-

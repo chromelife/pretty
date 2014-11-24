@@ -10,18 +10,17 @@ class Image extends \Eloquent {
 	protected $fillable = [ 'image_url', 'title', 'isVisible', 'page_id' ];
 
 	
-	
 	public static function storeImage( $title, $isVisible, $file )
 	{
 		// Save image to server filesystem
 		$filename = $file->getClientOriginalName();
 		$destinationPath = public_path() . '/Photos/';
-		$image_url = '/Photos/' . $filename;
+		$image_url = $filename;
 		$file = $file->move ( $destinationPath , $filename );
 
 		// store image details in DB through Eloquent model
 		$image = static::create( compact( 'title', 'image_url', 'isVisible' ));
-				
+
 		// Fire a event
 		$image->raise( new ImageWasStored( $image ));
 
@@ -55,4 +54,3 @@ class Image extends \Eloquent {
 	}
 
 }
-

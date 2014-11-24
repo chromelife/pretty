@@ -1,13 +1,23 @@
-<?php 
+<?php
 
 class pageViewController extends \BaseController {
-	
+
 	protected static $restful = true;
 
 	public function constructPageView() {
-		// $images = Image::where('isVisible', '=', '1')->get();
-		// $posts = Post::where('isVisible', '=', '1')->get();
-		$pages = Page::all();
+
+	 $pages = DB::select(
+		DB::raw('
+			select * from pages
+			inner join images on pages.image_id = images.id
+			inner join posts on pages.post_id = posts.id
+		 '));
+
+
+	// $queries = DB::getQueryLog();
+	// dd($queries);
+	// dd($pages);
+
 		return View::make('hello', compact('pages'));
 	}
 

@@ -5,9 +5,9 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"way/generators":"dev-master",
-		"laravelbook/ardent":"dev-master",
-		"maximebf/debugbar":">=1.0.0"
+		"way/generators":"2.6.1",
+		"maximebf/debugbar":">=1.0.0",
+		"barryvdh/laravel-debugbar": "1.*"
 	},
 	"autoload": {
 		"classmap": [
@@ -21,7 +21,7 @@
 		"psr-4" : {
 			"Pretty\\": "App/Pretty"
 		}
-		
+
 	},
 	"scripts": {
 		"post-install-cmd": [

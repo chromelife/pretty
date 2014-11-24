@@ -16,8 +16,9 @@ class Post extends \Eloquent {
 		'isVisible'
 	);
 
+
 	public function page ()
 	{
-		return $this->belongsTo('Page', 'page_id');
+		return $this->belongsToMany('Page');
 	}
 }

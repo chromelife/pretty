@@ -1,0 +1,9 @@
+﻿<?xml version="1.0"?>
+<configuration date="2014/11/19" author="e.World Technology Ltd.">
+<project id="{CEBF9F3B-07D1-4505-8A7F-76F4AD5E1F26}" file="" name="project1" product="PHPMaker" version="10.0" datetime="2014/11/19 14:12:45" languagefolder="phplang" userlevel="">
+<table id="image_page" name="image_page" caption="image page" userlevel="" priv="1"/>
+<table id="images" name="images" caption="images" userlevel="" priv="1"/>
+<table id="page_post" name="page_post" caption="page post" userlevel="" priv="1"/>
+<table id="pages" name="pages" caption="pages" userlevel="" priv="1"/>
+<table id="posts" name="posts" caption="posts" userlevel="" priv="1"/>
+</project></configuration>
