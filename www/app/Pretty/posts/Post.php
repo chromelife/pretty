@@ -7,11 +7,16 @@ class Post extends \Eloquent {
 
 	use EventGenerator;
 
-	protected $fillable = [ 'title', 'content', 'isVisible'	];
-	
-	public static function storePost( $title, $isVisible, $content )
+	protected $fillable = [ 'title', 'content' ];
+
+	public function storePost( $input )
 	{
-		$post = static::create( compact( 'title', 'isVisible', 'content' ));
+
+		$post = new Post;
+		$post->title = $input['title'];
+		$post->content = $input['content'];
+		$post->save();
+
 
 		// Fire a PostWasStored event
 		$post->raise( new PostWasStored( $post ));
@@ -21,7 +26,7 @@ class Post extends \Eloquent {
 
 	public function deletePost () {
 
-		// use Eloquent to remove entry from DB 
+		// use Eloquent to remove entry from DB
 		$this->delete();
 
 		// Fire a PostWasDeleted event
@@ -30,13 +35,12 @@ class Post extends \Eloquent {
 		return $this;
 	}
 
-	public function updatePost ( $id, $title, $content, $isVisible ) {
+	public function updatePost ( $id, $input ) {
 
 		//Get post from id and update with input
 		$post = $this->findOrFail( $id );
-		$post->title = $title;
-		$post->content = $content;
-		$post->isVisible = $isVisible;
+		$post->title = $input['title'];
+		$post->content = $input['content'];
 		$post->update();
 
 		$post->raise( new PostWasUpdated( $post ));

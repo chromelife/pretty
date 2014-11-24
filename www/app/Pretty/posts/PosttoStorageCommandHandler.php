@@ -13,13 +13,14 @@ class PosttoStorageCommandHandler implements CommandHandler {
 	{
 		$this->post = $post;
 		$this->dispatcher = $dispatcher;
-		
+
 	}
 
 	public function handle( $command )
 	{
-		$post = Post::storePost( $command->title, $command->isVisible, $command->content );
-
+		$post = $this->post->storePost(
+				$command->input
+		);
 		// Dispatch events
 		$this->dispatcher->dispatch( $post->releaseEvents() );
 	}

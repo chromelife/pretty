@@ -6,7 +6,7 @@ use Pretty\posts\PostDeleteCommand;
 use Pretty\posts\PostUpdateCommand;
 
 class PostsController extends \BaseController {
-	
+
 	protected $post;
 	protected $commandBus;
 
@@ -47,13 +47,10 @@ class PostsController extends \BaseController {
 	{
 		// Get input
 		$input = Input::all();
-				
+
 		// Take inputs, validate, and add new post to db if they pass
-		$title = $input['title'];
-		$content = $input['content'];
-		$isVisible = $input['isVisible'];
-		$command = new PosttoStorageCommand ($title, $isVisible, $content);
-		$this->commandBus->execute($command);	
+		$command = new PosttoStorageCommand ($input);
+		$this->commandBus->execute($command);
 		return Redirect::route('posts.index');
 	}
 
@@ -92,12 +89,12 @@ class PostsController extends \BaseController {
 	public function update($id)
 	{
 		$input = Input::all();
-		$title = $input['title'];		
+		$title = $input['title'];
 		$content = $input['content'];
 		$isVisible = $input['isVisible'];
 
 		$command = new PostUpdateCommand( $id, $title, $content, $isVisible );
-		$this->commandBus->execute( $command ); 
+		$this->commandBus->execute( $command );
 
 		return Redirect::route('posts.index');
 	}

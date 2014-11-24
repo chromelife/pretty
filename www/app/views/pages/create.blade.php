@@ -18,7 +18,7 @@
         </li>
 
         <li>
-            {{ Form::label('isVisible', 'Is Visible?') }}
+            {{ Form::label('isVisible', 'Publish?') }}
             {{ Form::text('isVisible') }}
         </li>
 
@@ -36,5 +36,3 @@
 @endif
 
 @stop
-
-

@@ -16,11 +16,6 @@
             {{ Form::text('content') }}
         </li>
 
-        <li>
-            {{ Form::label('isVisible', 'Is visible:') }}
-            {{ Form::text('isVisible') }}
-        </li>
-
 		<li>
 			{{ Form::submit('Submit', array('class' => 'btn btn-info')) }}
 		</li>
@@ -34,5 +29,3 @@
 @endif
 
 @stop
-
-

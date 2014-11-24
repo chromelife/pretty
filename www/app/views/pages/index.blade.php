@@ -9,14 +9,14 @@
 	<div class="flash">
 		{{ Session::get('flash_message')}}
 	</div>
-@endif 
+@endif
 
 
 <h1>All Pages</h1>
 
 <p>{{ link_to_route('pages.create', 'Add new page') }}</p>
 
-@if ($pages->count())
+@if ($pages != null)
 	<table class="table table-striped table-bordered">
 		<thead>
 			<tr>
@@ -24,7 +24,7 @@
 				<th>Image</th>
 				<th>Post</th>
 				<th>Is Visible?</th>
-				
+
 			</tr>
 		</thead>
 
@@ -32,8 +32,8 @@
 			@foreach ($pages as $page)
 				<tr>
 					<td>{{{ $page->id }}}</td>
-					<td>{{{ $page->image->image_url }}}</td>
-					<td>{{{ $page->post->title }}}</td>
+					<td>{{{ $page->image_url }}}</td>
+					<td>{{{ $page->title }}}</td>
 					<td>{{{ $page->isVisible }}}</td>
                     <td>{{ link_to_route('pages.edit', 'Edit', array($page->id), array('class' => 'btn btn-info')) }}</td>
                     <td>

@@ -9,13 +9,13 @@ class Image extends \Eloquent {
 
 	protected $fillable = [ 'image_url', 'title', 'isVisible', 'page_id' ];
 
-	
+
 	public static function storeImage( $title, $isVisible, $file )
 	{
 		// Save image to server filesystem
 		$filename = $file->getClientOriginalName();
 		$destinationPath = public_path() . '/Photos/';
-		$image_url = $filename;
+		$image_url = '/Photos/'.$filename;
 		$file = $file->move ( $destinationPath , $filename );
 
 		// store image details in DB through Eloquent model

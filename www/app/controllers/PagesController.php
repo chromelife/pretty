@@ -24,9 +24,14 @@ class PagesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$pages = $this->page->all();
+		$pages = DB::select(
+		DB::raw('
+			select * from pages
+			inner join images on pages.image_id = images.id
+			inner join posts on pages.post_id = posts.id
+			'));
 
-		// dd($pages);
+		//  dd($pages);
 		return View::make( 'pages.index', compact( 'pages' ) );
 	}
 
@@ -52,13 +57,10 @@ class PagesController extends \BaseController {
 	public function store()
 	{
 		$input = Input::only('image_id', 'post_id', 'isVisible');
-		$image_id = $input['image_id'];
-		$post_id = $input['post_id'];
-		$isVisible = $input['isVisible'];
 
-		$command = new PageStorageCommand ( $image_id, $post_id, $isVisible );
+		$command = new PageStorageCommand ( $input );
 		$this->commandBus->execute( $command );
-		
+
 		return Redirect::route( 'pages.index' );
 	}
 

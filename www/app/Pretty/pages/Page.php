@@ -17,18 +17,14 @@ class Page extends \Eloquent {
 
 	protected $fillable = [ 'image_id', 'post_id', 'isVisible' ];
 
-	public function storePage( $image_id, $post_id, $isVisible )
+	public function storePage( $input )
 	{
 
 		$page = new Page;
-		$page->image_id = $image_id;
-		$page->post_id = $post_id;
-		$page->push();
-
-		$id = $page->id;
-
-		$page = Page::find($id);
-
+		$page->image_id = $input['image_id'];
+		$page->post_id = $input['post_id'];
+		$page->isVisible = $input['isVisible'];
+		$page->save();
 
 		$page->raise( new PageWasStored( $page ));
 

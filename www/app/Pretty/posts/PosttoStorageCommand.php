@@ -3,18 +3,11 @@
 // use Log;
 
 class PostToStorageCommand {
-	
-	public $title;
 
-	public $isVisible;
+	public $input;
 
-	public $content;
-
-	function __construct( $title, $isVisible, $content )
+	function __construct( $input )
 	{
-		$this->title = $title;
-		$this->isVisible = $isVisible; 
-		$this->content = $content;
+		$this->input = $input;
 	}
 }
-

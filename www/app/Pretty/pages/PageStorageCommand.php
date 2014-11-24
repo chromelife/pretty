@@ -1,20 +1,13 @@
 <?php namespace Pretty\pages;
 
-use Log;
+// use Log;
 
 class PageStorageCommand {
-	
-	public $image_id;
 
-	public $post_id;
+	public $input;
 
-	public $isVisible;
-
-	function __construct( $image_id, $post_id, $isVisible )
+	function __construct( $input )
 	{
-		$this->image_id = $image_id;
-		$this->post_id = $post_id; 
-		$this->isVisible = $isVisible;
-				
+		$this->input = $input;
 	}
 }

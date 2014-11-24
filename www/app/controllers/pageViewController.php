@@ -14,10 +14,8 @@ class pageViewController extends \BaseController {
 		 '));
 
 
-	// $queries = DB::getQueryLog();
-	// dd($queries);
-	// dd($pages);
-
+		// $queries = DB::getQueryLog();
+		// dd($queries);
 		return View::make('hello', compact('pages'));
 	}
 

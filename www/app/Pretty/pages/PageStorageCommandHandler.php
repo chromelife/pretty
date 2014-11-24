@@ -13,21 +13,19 @@ class PageStorageCommandHandler implements CommandHandler {
 	{
 		$this->page = $page;
 		$this->dispatcher = $dispatcher;
-		
+
 	}
 
 	public function handle( $command )
 	{
 		$page = $this->page->storePage(
-			$command->image_id,
-			$command->post_id,
-			$command->isVisible
-			
+			$command->input
+
 		);
-		
+
 		// Dispatch events
 		$this->dispatcher->dispatch( $page->releaseEvents() );
-		
+
 	}
 
 }
