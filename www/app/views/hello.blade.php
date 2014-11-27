@@ -6,11 +6,11 @@
 		<section class="img-dragger img-dragger-large dragdealer">
 
 				<div class="handle">
-					@foreach ($pages as $page)
+					@foreach ( $pages as $page )
 
-					<div class="slide" data-content="content-{{$page->id}}">
-						<div class="img-wrap"><img src='{{$page->image_url}}' alt=""/></div>
-						<h2>{{$page->title}}<span>Subtitle? oh you needed that?</span></h2>
+					<div class="slide" data-content="content-{{ $page->id }}">
+						<div class="img-wrap"><img src='{{ $page->image_url }}' alt=""/></div>
+						<h2>{{ $page->post_title }}<span>{{ $page->post_byline }}</span></h2>
 						<button class="content-switch">Read more</button>
 					</div>
 					@endforeach
@@ -21,10 +21,10 @@
 			<!-- Content section -->
 
 			<section class="pages">
-				@foreach ($pages as $page)
-				<div class="content" data-content="content-{{$page->id}}">
-					<h2>{{$page->title}}</h2>
-					<p>{{$page->content}}</p>
+				@foreach ( $pages as $page )
+				<div class="content" data-content="content-{{ $page->id }}">
+					<h2>{{ $page->post_title }}</h2>
+					<p>{{ $page->post_content }}</p>
 					<p class="related">
 					Foo!
 					</p>

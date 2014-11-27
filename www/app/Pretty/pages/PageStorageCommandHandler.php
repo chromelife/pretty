@@ -2,7 +2,6 @@
 
 use Pretty\Commanding\CommandHandler;
 use Pretty\eventing\EventDispatcher;
-use Log;
 
 class PageStorageCommandHandler implements CommandHandler {
 

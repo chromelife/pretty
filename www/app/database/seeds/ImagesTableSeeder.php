@@ -6,33 +6,21 @@ class ImagesTableSeeder extends Seeder {
 	public function run()
 	{
 		// DB::table('posts')->truncate();
-		
-		// $images=[
-		// 	['title'=>'1','image_url'=>'/Photos/1.jpg','isVisible'=>'1', 'page_id'=> '1'],
-		// 	['title'=>'2','image_url'=>'/Photos/2.jpg','isVisible'=>'1', 'page_id'=> '2'],
-		// 	['title'=>'3','image_url'=>'/Photos/3.jpg','isVisible'=>'1', 'page_id'=> '3'],
-		// 	['title'=>'4','image_url'=>'/Photos/4.jpg','isVisible'=>'1', 'page_id'=> '4'],
-		// 	['title'=>'5','image_url'=>'/Photos/5.jpg','isVisible'=>'1', 'page_id'=> '5'],
-		// 	['title'=>'6','image_url'=>'/Photos/6.jpg','isVisible'=>'1', 'page_id'=> '6'],
-		// 	['title'=>'7','image_url'=>'/Photos/7.jpg','isVisible'=>'1', 'page_id'=> '7'],
-		// 	['title'=>'8','image_url'=>'/Photos/8.jpg','isVisible'=>'1', 'page_id'=> '8']
-			
 
-		// ];
 		$images=[
-			['title'=>'1','image_url'=>'/Photos/1.jpg','isVisible'=>'1'],
-			['title'=>'2','image_url'=>'/Photos/2.jpg','isVisible'=>'1'],
-			['title'=>'3','image_url'=>'/Photos/3.jpg','isVisible'=>'1'],
-			['title'=>'4','image_url'=>'/Photos/4.jpg','isVisible'=>'1'],
-			['title'=>'5','image_url'=>'/Photos/5.jpg','isVisible'=>'1'],
-			['title'=>'6','image_url'=>'/Photos/6.jpg','isVisible'=>'1'],
-			['title'=>'7','image_url'=>'/Photos/7.jpg','isVisible'=>'1'],
-			['title'=>'8','image_url'=>'/Photos/8.jpg','isVisible'=>'1']
-			
+			['image_name'=>'1','image_url'=>'/Photos/1.jpg'],
+			['image_name'=>'2','image_url'=>'/Photos/2.jpg'],
+			['image_name'=>'3','image_url'=>'/Photos/3.jpg'],
+			['image_name'=>'4','image_url'=>'/Photos/4.jpg'],
+			['image_name'=>'5','image_url'=>'/Photos/5.jpg'],
+			['image_name'=>'6','image_url'=>'/Photos/6.jpg'],
+			['image_name'=>'7','image_url'=>'/Photos/7.jpg'],
+			['image_name'=>'8','image_url'=>'/Photos/8.jpg']
+
 
 		];
 
-	DB::table('images')->insert($images);	
+	DB::table('images')->insert($images);
 	}
 
 }

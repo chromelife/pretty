@@ -7,7 +7,7 @@ class Image extends \Eloquent {
 
 	use EventGenerator;
 
-	protected $fillable = [ 'image_url', 'title', 'isVisible', 'page_id' ];
+	protected $fillable = [ 'image_url', 'image_name' ];
 
 
 	public static function storeImage( $title, $isVisible, $file )
@@ -19,7 +19,7 @@ class Image extends \Eloquent {
 		$file = $file->move ( $destinationPath , $filename );
 
 		// store image details in DB through Eloquent model
-		$image = static::create( compact( 'title', 'image_url', 'isVisible' ));
+		$image = static::create( compact( 'image_url', 'image_name' ));
 
 		// Fire a event
 		$image->raise( new ImageWasStored( $image ));
@@ -44,7 +44,7 @@ class Image extends \Eloquent {
 	public function updateImage( $id, $title, $isVisible )
 	{
 		$image = $this->findOrFail($id);
-		$image->title = $title;
+		$image->image_name = $title;
 		$image->isVisible = $isVisible;
 		$image->update();
 

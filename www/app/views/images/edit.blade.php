@@ -11,7 +11,7 @@
         </li>
 
         <li>
-            {{ Form::label('isVisible', 'Is visible:') }}
+            {{ Form::label('isVisible', 'Publish:') }}
             {{ Form::input('string', 'isVisible') }}
         </li>
 

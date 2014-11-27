@@ -2,7 +2,7 @@
 
 @section('main')
 
-<h1>Create Post</h1>
+<h1>Create New Page</h1>
 
 
 {{ Form::open(['route' => 'pages.store']) }}

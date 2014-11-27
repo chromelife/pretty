@@ -31,4 +31,24 @@ class Page extends \Eloquent {
 		return $page;
 	}
 
+	public function updatePage( $id, $input ){
+
+		$page = $this->findOrFail( $id );
+
+		$page->image_id = $input['image_id'];
+		$page->post_id = $input['post_id'];
+		$page->isVisible = $input['isVisible'];
+		$page->update();
+
+		$page->raise( new PageWasUpdated( $page ));
+
+	}
+
+	public function deletePage(){
+
+		$this->delete();
+
+		$this->raise( new PageWasDeleted( $this ));
+	}
+
 }

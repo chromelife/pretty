@@ -3,6 +3,8 @@
 use Pretty\commanding\ValidationCommandBus;
 
 use Pretty\pages\PageStorageCommand;
+use Pretty\pages\PageUpdateCommand;
+use Pretty\pages\PageDeleteCommand;
 
 class PagesController extends \BaseController {
 
@@ -15,7 +17,6 @@ class PagesController extends \BaseController {
 		$this->commandBus = $commandBus;
 	}
 
-
 	/**
 	 * Display a listing of the resource.
 	 * GET /pages
@@ -24,12 +25,14 @@ class PagesController extends \BaseController {
 	 */
 	public function index()
 	{
-		$pages = DB::select(
-		DB::raw('
-			select * from pages
-			inner join images on pages.image_id = images.id
-			inner join posts on pages.post_id = posts.id
-			'));
+		$query = '
+		select * from pages
+		inner join images on pages.image_id = images.image_id
+		inner join posts on pages.post_id = posts.post_id
+		';
+
+		$pages = DB::select( DB::raw( $query ) );
+
 
 		//  dd($pages);
 		return View::make( 'pages.index', compact( 'pages' ) );
@@ -43,8 +46,8 @@ class PagesController extends \BaseController {
 	 */
 	public function create()
 	{
-		$pageImages = Image::lists('image_url', 'id');
-		$pagePosts = Post::lists('title', 'id');
+		$pageImages = Image::lists('image_url', 'image_id');
+		$pagePosts = Post::lists('post_title', 'post_id');
 		return View::make('pages.create', compact( 'pageImages', 'pagePosts'));
 	}
 
@@ -86,7 +89,16 @@ class PagesController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		//
+		$page = $this->page->find( $id );
+		$pageImages = Image::lists('image_url', 'image_id');
+		$pagePosts = Post::lists('post_title', 'post_id');
+
+		if (is_null( $page ))
+		{
+			return Redirect::route( 'pages.index' );
+		}
+
+		return View::make( 'pages.edit', compact( 'page', 'pageImages', 'pagePosts' ) );
 	}
 
 	/**
@@ -98,7 +110,13 @@ class PagesController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$input = array_except( Input::all(), '_method' );
+
+		$command = new PageUpdateCommand( $id, $input);
+		$this->commandBus->execute( $command );
+
+		return Redirect::route( 'pages.show', $id );
+
 	}
 
 	/**
@@ -110,7 +128,11 @@ class PagesController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$command = new PageDeleteCommand( $id );
+		$this->commandBus->execute( $command );
+
+		return Redirect::route( 'pages.index' );
+
 	}
 
 }

@@ -327,7 +327,7 @@ img {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
   display: inline-block;
-  max-width: 100%;
+  max-width: 50%;
   height: auto;
 }
 .img-circle {
@@ -594,7 +594,7 @@ ol ol {
   padding-left: 0;
 }
 .create-form {
-  
+
 
 
 }

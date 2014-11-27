@@ -16,6 +16,7 @@
 <body class="section">
 
  		<tr>
+			<td><a href="../pages">Pages</a></td>
  			<td><a href="../images">Images</a></td>
 			<td><a href="../posts">Posts</a></td>
 			<td><a href="../logout">Logout</a></td>

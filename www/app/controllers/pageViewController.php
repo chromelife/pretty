@@ -6,16 +6,15 @@ class pageViewController extends \BaseController {
 
 	public function constructPageView() {
 
-	 $pages = DB::select(
-		DB::raw('
+		$query = '
 			select * from pages
-			inner join images on pages.image_id = images.id
-			inner join posts on pages.post_id = posts.id
-		 '));
+			inner join images on pages.image_id = images.image_id
+			inner join posts on pages.post_id = posts.image_id
+			where pages.isVisible = 1
+		';
 
+		$pages = DB::select( DB::raw( $query ) );
 
-		// $queries = DB::getQueryLog();
-		// dd($queries);
 		return View::make('hello', compact('pages'));
 	}
 
