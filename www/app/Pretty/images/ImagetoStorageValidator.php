@@ -12,19 +12,17 @@ class ImagetoStorageValidator {
 	{
 		$validator = Validator::make([
 			'image' => $command->file,
-			'title' => $command->title,
-			'isVisible' => $command->isVisible
+			'title' => $command->input['title']
+
 		],[
 			'image' => 'image|required',
-			'title' => 'required',
-			'isVisible' => 'required|boolean'
-			]);
+			'title' => 'required'
+		]);
 
 		if ($validator->fails())
 		{
 			throw new ValidationException($validator->messages());
 		}
 	}
-	
-}
 
+}

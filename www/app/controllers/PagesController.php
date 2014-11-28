@@ -112,7 +112,7 @@ class PagesController extends \BaseController {
 	{
 		$input = array_except( Input::all(), '_method' );
 
-		$command = new PageUpdateCommand( $id, $input);
+		$command = new PageUpdateCommand( $id, $input );
 		$this->commandBus->execute( $command );
 
 		return Redirect::route( 'pages.show', $id );

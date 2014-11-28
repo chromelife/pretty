@@ -21,8 +21,8 @@ class PostsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
+	public function index(){
+
 		$posts = Post::all();
 
 		return View::make('posts.index', compact('posts'));
@@ -33,8 +33,8 @@ class PostsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function create()
-	{
+	public function create(){
+
 		return View::make('posts.create');
 	}
 
@@ -43,11 +43,11 @@ class PostsController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
+	public function store(){
+
 		// Get input
 		$input = Input::all();
-
+		dd($input);
 		// Take inputs, validate, and add new post to db if they pass
 		$command = new PosttoStorageCommand ($input);
 		$this->commandBus->execute($command);
@@ -60,8 +60,8 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
+	public function show($id){
+
 		$post = Post::findOrFail($id);
 
 		return View::make('posts.show', compact('post'));
@@ -73,8 +73,8 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
-	{
+	public function edit($id){
+
 		$post = Post::find($id);
 
 		return View::make('posts.edit', compact('post'));
@@ -86,14 +86,11 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
-	{
-		$input = Input::all();
-		$title = $input['title'];
-		$content = $input['content'];
-		$isVisible = $input['isVisible'];
+	public function update($id){
 
-		$command = new PostUpdateCommand( $id, $title, $content, $isVisible );
+		$input = Input::all();
+
+		$command = new PostUpdateCommand( $id, $input );
 		$this->commandBus->execute( $command );
 
 		return Redirect::route('posts.index');
@@ -105,8 +102,8 @@ class PostsController extends \BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
+	public function destroy($id){
+
 		$command = new PostDeleteCommand( $id );
 		$this->commandBus->execute( $command );
 

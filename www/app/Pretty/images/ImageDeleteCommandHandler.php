@@ -16,7 +16,7 @@ class ImageDeleteCommandHandler implements CommandHandler {
 
 	public function handle ( $command )
 	{
-		$image = $this->image->findOrFail ($command->id);
+		$image = $this->image->findOrFail ($command->image_id);
 
 		$image->deleteImage();
 

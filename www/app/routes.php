@@ -18,12 +18,3 @@ Route::resource( 'posts',	'PostsController' );
 Route::resource( 'pages',	'PagesController' );
 
 Route::get( '/', 'pageViewController@constructPageView');
-
-Route::get('pagestest', function()
-{
-	foreach(Page::with('image', 'post')->get() as $page)
-	{
-		var_dump( $page->image->image_url, $page->post->title);
-	}
-});
-

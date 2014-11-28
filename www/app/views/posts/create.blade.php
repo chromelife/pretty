@@ -1,25 +1,15 @@
-@extends('layouts.scaffold1')
+@extends('layouts.scaffold-editor')
 
 @section('main')
 
 <h1>Create Post</h1>
 
-{{ Form::open(['route' => 'posts.store', 'files'=>true]) }}
-	<ul>
-        <li>
-            {{ Form::label('title', 'Title:') }}
-            {{ Form::text('title') }}
-        </li>
+{{ Form::open(['route' => 'posts.store']) }}
+  <div class="title-editable" id="post-post_title"> Title </div>
+	<div class="content-editable" id="post-post_content"> Content </div>
+{{ Form::submit('Submit', array('class' => 'btn btn-info', 'id' => 'form-submit')) }}
 
-        <li>
-            {{ Form::label('content', 'Content:') }}
-            {{ Form::text('content') }}
-        </li>
 
-		<li>
-			{{ Form::submit('Submit', array('class' => 'btn btn-info')) }}
-		</li>
-	</ul>
 {{ Form::close() }}
 
 @if ($errors->any())

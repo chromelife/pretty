@@ -11,21 +11,19 @@
 		<tr>
 			<th>Title</th>
 			<th>Content</th>
-			<th>Is visible</th>
 		</tr>
 	</thead>
 
 	<tbody>
 		<tr>
-			<td>{{{ $post->title }}}</td>
-			<td>{{{ $post->content }}}</td>
-			<td>{{{ $post->isVisible }}}</td>
-            <td>{{ link_to_route('posts.edit', 'Edit', array($image->id), array('class' => 'btn btn-info')) }}</td>
-            <td>
-                {{ Form::open(array('method' => 'DELETE', 'route' => array('posts.destroy', $post->id))) }}
-                    {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
-                {{ Form::close() }}
-            </td>
+			<td>{{{ $post->post_title }}}</td>
+			<td>{{{ $post->post_content }}}</td>
+        <td>{{ link_to_route('posts.edit', 'Edit', array($image->id), array('class' => 'btn btn-info')) }}</td>
+        <td>
+            {{ Form::open(array('method' => 'DELETE', 'route' => array('posts.destroy', $post->id))) }}
+                {{ Form::submit('Delete', array('class' => 'btn btn-danger')) }}
+            {{ Form::close() }}
+        </td>
 		</tr>
 	</tbody>
 </table>

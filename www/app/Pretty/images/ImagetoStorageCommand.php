@@ -3,19 +3,16 @@
 use Log;
 
 class ImageToStorageCommand {
-	
-	public $title;
 
-	public $isVisible;
+	public $input;
 
 	public $file;
 
-	function __construct( $title, $isVisible, $file )
+	function __construct( $input, $file )
 	{
-		$this->title = $title;
-		$this->isVisible = $isVisible; 
+		$this->input = $input;
 		$this->file = $file;
-		
-		
+
+
 	}
 }

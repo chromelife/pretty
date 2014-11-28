@@ -189,6 +189,13 @@ td,
 th {
   padding: 0;
 }
+.mediumInsert .mediumInsert-buttons {
+  top: -20px !important;
+}
+
+.mediumInsert .mediumInsert-placeholder .mediumInsert-images img {
+  margin-bottom: 40px !important;
+}
 @media print {
   * {
     text-shadow: none !important;

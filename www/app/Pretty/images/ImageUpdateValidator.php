@@ -10,17 +10,15 @@ class ImageUpdateValidator {
 	public function validate( ImageUpdateCommand $command )
 	{
 		$validator = Validator::make([
-			'title' => $command->title,
-			'isVisible' => $command->isVisible
+			'title' => $command->input['title'],
 		],[
 			'title' => 'required',
-			'isVisible' => 'required|boolean'
-			]);
+		]);
 
 		if ($validator->fails())
 		{
 			throw new ValidationException($validator->messages());
 		}
 	}
-	
+
 }

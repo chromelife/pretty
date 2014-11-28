@@ -21,7 +21,7 @@ class ImagesController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	
+
 	public function index()
 	{
 		$images = $this->image->all();
@@ -33,7 +33,7 @@ class ImagesController extends BaseController {
 	 *
 	 * @return View
 	 */
-	
+
 	public function create()
 	{
 		return View::make( 'images.create' );
@@ -44,17 +44,15 @@ class ImagesController extends BaseController {
 	 *
 	 * @return Response
 	 */
-	
+
 	public function store()
 	{
 		// Grab form inputs
-		$input = Input::only( 'title', 'isVisible' );
+		$input = Input::only( 'title' );
 		$file = Input::file( 'image' );
-		$title = $input[ 'title' ];
-		$isVisible = $input[ 'isVisible' ];
-				
+
 		// Store image in DB and filesystem
-		$command = new ImageToStorageCommand ( $title, $isVisible, $file );
+		$command = new ImageToStorageCommand ( $input, $file );
 		$this->commandBus->execute( $command );
 
 		return Redirect::route( 'images.index' );
@@ -66,7 +64,7 @@ class ImagesController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	
+
 	public function show( $id )
 	{
 		$image = $this->image->findOrFail( $id );
@@ -79,7 +77,7 @@ class ImagesController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	
+
 	public function edit( $id )
 	{
 		$image = $this->image->find( $id );
@@ -98,18 +96,16 @@ class ImagesController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	
+
 	public function update( $id )
 	{
 		// Grab inputs from edit form
 		$input = array_except( Input::all(), '_method' );
-		$title = $input['title'];
-		$isVisible = $input['isVisible'];
-		
+
 		// perform update on Images table
-		$command = new ImageUpdateCommand($id, $title, $isVisible);
+		$command = new ImageUpdateCommand( $id, $input );
 		$this->commandBus->execute($command);
-		
+
 		return Redirect::route( 'images.show', $id );
 	}
 
@@ -119,12 +115,12 @@ class ImagesController extends BaseController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	
+
 	public function destroy( $id )
 	{
 		$command = new ImageDeleteCommand( $id );
 		$this->commandBus->execute( $command );
-	
+
 		return Redirect::route( 'images.index' );
 	}
 

@@ -13,21 +13,20 @@ class ImageUpdateCommandHandler implements CommandHandler {
 	{
 		$this->image = $image;
 		$this->dispatcher = $dispatcher;
-		
+
 	}
 
 	public function handle( $command )
 	{
 		$image = $this->image->updateImage(
 			$command->id,
-			$command->title,
-			$command->isVisible
-						
+			$command->input
+
 		);
-		
+
 		// Dispatch events
 		$this->dispatcher->dispatch( $image->releaseEvents() );
-		
+
 	}
 
 }

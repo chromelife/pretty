@@ -3,21 +3,14 @@
 // use Log;
 
 class PostUpdateCommand {
-	
+
 	public $id;
 
-	public $title;
+	public $input;
 
-	public $content;
-
-	public $isVisible; 
-
-	function __construct( $id, $title, $content, $isVisible )
+	function __construct( $id, $input )
 	{
 		$this->id = $id;
-		$this->title = $title;
-		$this->content = $content;
-		$this->isVisible = $isVisible; 
+		$this->input = $input;
 	}
 }
-

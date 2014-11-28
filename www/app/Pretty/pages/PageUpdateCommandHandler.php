@@ -19,11 +19,11 @@ class PageUpdateCommandHandler implements CommandHandler {
   {
     $page = $this->page->findOrFail ($command->id);
 
-    $page = $this->page->updatePage(
+    $page->updatePage(
       $command->id,
       $command->input
     );
-    
+
     // Dispatch events
     $this->dispatcher->dispatch( $page->releaseEvents() );
 

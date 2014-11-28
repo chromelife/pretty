@@ -9,14 +9,12 @@ class Post extends \Eloquent {
 
 	protected $fillable = [ 'title', 'content' ];
 
-	public function storePost( $input )
-	{
+	public function storePost( $input ){
 
 		$post = new Post;
-		$post->title = $input['title'];
-		$post->content = $input['content'];
+		$post->post_title = $input['title'];
+		$post->post_content = $input['content'];
 		$post->save();
-
 
 		// Fire a PostWasStored event
 		$post->raise( new PostWasStored( $post ));
@@ -24,7 +22,7 @@ class Post extends \Eloquent {
 		return $post;
 	}
 
-	public function deletePost () {
+	public function deletePost(){
 
 		// use Eloquent to remove entry from DB
 		$this->delete();
@@ -35,12 +33,12 @@ class Post extends \Eloquent {
 		return $this;
 	}
 
-	public function updatePost ( $id, $input ) {
+	public function updatePost( $id, $input ){
 
 		//Get post from id and update with input
 		$post = $this->findOrFail( $id );
-		$post->title = $input['title'];
-		$post->content = $input['content'];
+		$post->post_title = $input['title'];
+		$post->post_content = $input['content'];
 		$post->update();
 
 		$post->raise( new PostWasUpdated( $post ));

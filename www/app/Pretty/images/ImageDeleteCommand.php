@@ -1,11 +1,11 @@
 <?php namespace Pretty\images;
 
 class ImageDeleteCommand {
-	
+
 	public $id;
 
-	function __construct($id)
+	function __construct($image_id)
 	{
-		$this->id = $id;
+		$this->image_id = $image_id;
 	}
 }

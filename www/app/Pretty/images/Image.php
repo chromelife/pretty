@@ -10,13 +10,15 @@ class Image extends \Eloquent {
 	protected $fillable = [ 'image_url', 'image_name' ];
 
 
-	public static function storeImage( $title, $isVisible, $file )
+	public static function storeImage( $input, $file )
 	{
 		// Save image to server filesystem
 		$filename = $file->getClientOriginalName();
 		$destinationPath = public_path() . '/Photos/';
 		$image_url = '/Photos/'.$filename;
 		$file = $file->move ( $destinationPath , $filename );
+
+		$image->image_name = $input['title'];
 
 		// store image details in DB through Eloquent model
 		$image = static::create( compact( 'image_url', 'image_name' ));
@@ -41,11 +43,10 @@ class Image extends \Eloquent {
 		return $this;
 	}
 
-	public function updateImage( $id, $title, $isVisible )
+	public function updateImage( $image_id, $input )
 	{
-		$image = $this->findOrFail($id);
-		$image->image_name = $title;
-		$image->isVisible = $isVisible;
+		$image = $this->findOrFail( $image_id );
+		$image->image_name = $input['title'];
 		$image->update();
 
 		$image->raise( new ImageWasUpdated( $image ) );

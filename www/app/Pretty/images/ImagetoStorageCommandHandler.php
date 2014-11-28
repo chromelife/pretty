@@ -13,21 +13,20 @@ class ImagetoStorageCommandHandler implements CommandHandler {
 	{
 		$this->image = $image;
 		$this->dispatcher = $dispatcher;
-		
+
 	}
 
 	public function handle( $command )
 	{
 		$image = $this->image->storeImage(
-			$command->title,
-			$command->isVisible,
-			$command->file
-			
+			$command->input,
+		  $command->file
+
 		);
-		
+
 		// Dispatch events
 		$this->dispatcher->dispatch( $image->releaseEvents() );
-		
+
 	}
 
 }
