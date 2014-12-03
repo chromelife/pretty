@@ -8,12 +8,14 @@ class PosttoStorageValidator {
 
 	public function validate( PosttoStorageCommand $command )
 	{
+
 		$validator = Validator::make([
-			'title' => $command->input['title'],
-			'content' => $command->input['content']
+			// 'title' => $command->input['title'],
+			// 'content' => $command->input['content']
+			// 'title' => $command->post_title
 		],[
-			'title' => 'required',
-			'content' => 'required'
+			// 'title' => 'required'
+			// 'content' => 'required'
 		]);
 
 		if ($validator->fails())

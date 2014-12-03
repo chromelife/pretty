@@ -9,7 +9,7 @@ class pageViewController extends \BaseController {
 		$query = '
 			select * from pages
 			inner join images on pages.image_id = images.image_id
-			inner join posts on pages.post_id = posts.image_id
+			inner join posts on pages.post_id = posts.post_id
 			where pages.isVisible = 1
 		';
 

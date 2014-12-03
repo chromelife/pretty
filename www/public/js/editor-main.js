@@ -28,7 +28,7 @@ $('body').on('click', '#form-submit', function(e){
   e.preventDefault();
   var postTitle = titleEditor.serialize();
   var postContent = bodyEditor.serialize();
-
+console.log(postTitle, postContent);
   $.ajax({
     type: 'POST',
     dataType: 'json',
@@ -38,8 +38,8 @@ $('body').on('click', '#form-submit', function(e){
       'Content-type' : ('application/json')
     },
     data: {
-      post_title: postTitle['post-post_title']['value'],
-      post_content: postContent['post-post_content']['value']
+      post_title: postTitle['post_title']['value'],
+      post_content: postContent['post_content']['value']
     },
     success: function(data) {
       if(data.success === false)
@@ -60,6 +60,9 @@ $('body').on('click', '#form-submit', function(e){
       error: function(xhr, textStatus, thrownError) {
         // alert('Something went wrong. Please Try again later...');
         console.log(arguments);
+        setTimeout(function() {
+          window.location.href = "http://localhost:8888/posts";
+        }, 2000);
       }
     });
     return false;
@@ -75,7 +78,7 @@ $('body').on('click', '#form-submit', function(e){
       type: 'PUT',
       dataType: 'json',
       url : "{{ URL::action('PostsController@update', array(Request::segment(2))) }}",
-      data: { post_title: postTitle['post-post_title']['value'], post_content: postContent['post-post_content']['value'] },
+      data: { post_title: postTitle['post_title']['value'], post_content: postContent['post_content']['value'] },
       success: function(data) {
         if(data.success === false)
           {

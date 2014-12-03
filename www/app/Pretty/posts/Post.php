@@ -7,13 +7,13 @@ class Post extends \Eloquent {
 
 	use EventGenerator;
 
-	protected $fillable = [ 'title', 'content' ];
+	protected $fillable = [ 'post_title', 'post_content' ];
 
-	public function storePost( $input ){
-
+	public function storePost( $post_title, $post_content ){
+		
 		$post = new Post;
-		$post->post_title = $input['title'];
-		$post->post_content = $input['content'];
+		$post->post_title = $post_title;
+		$post->post_content = $post_content;
 		$post->save();
 
 		// Fire a PostWasStored event

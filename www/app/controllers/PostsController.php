@@ -46,12 +46,16 @@ class PostsController extends \BaseController {
 	public function store(){
 
 		// Get input
-		$input = Input::all();
-		dd($input);
+		$input = Input::json();
+		var_dump($input);
+		$post_title = $input->get('post_title');
+		$post_content = $input->get('post_content');
+
 		// Take inputs, validate, and add new post to db if they pass
-		$command = new PosttoStorageCommand ($input);
+		$command = new PosttoStorageCommand ($post_title, $post_content);
 		$this->commandBus->execute($command);
-		return Redirect::route('posts.index');
+		// return Redirect::route('posts.index');
+		return Response::json(array('success' => true));
 	}
 
 	/**

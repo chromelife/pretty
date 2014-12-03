@@ -19,7 +19,8 @@ class PosttoStorageCommandHandler implements CommandHandler {
 	public function handle( $command )
 	{
 		$post = $this->post->storePost(
-				$command->input
+				$command->post_title,
+				$command->post_content
 		);
 		// Dispatch events
 		$this->dispatcher->dispatch( $post->releaseEvents() );
